@@ -16,8 +16,9 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { IApiResponse, IUser } from "@/interface";
-import UserDropdownMenu from "./UserDropdownMenu";
-import { PUBLIC_NAVBAR_ITEMS } from "../_constants";
+import { PUBLIC_NAVBAR_ITEMS } from "../../_constants";
+import UserDropdownMenu from "../../../../components/shared/UserDropdownMenu";
+
 
 interface PublicNavbarProps {
   user?: IApiResponse<IUser> | null;

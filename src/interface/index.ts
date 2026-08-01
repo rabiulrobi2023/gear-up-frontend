@@ -1,9 +1,15 @@
 import { Role, UserStatus } from "@/constants";
 
 export interface IApiResponse<T> {
-  success: false;
+  success: boolean;
   message: string;
   data: T;
+  metadata?: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPage: number;
+  };
 }
 
 export interface IUser {

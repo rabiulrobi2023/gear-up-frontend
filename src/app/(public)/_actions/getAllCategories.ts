@@ -5,9 +5,9 @@ import { IApiResponse, ICategory } from "@/interface";
 export const getAllCategories = async (): Promise<
   IApiResponse<ICategory[]>
 > => {
-  const res = await fetch(`${backendBaseUrl}/categories`, {
+  const res = await fetch(`${backendBaseUrl}/gear`, {
     method: "GET",
-    next: { revalidate: 1 * 24 * 60 * 60 },
+    next: { revalidate: 1 * 24 * 60 * 60, tags: ["categories"] },
     cache: "force-cache",
   });
   const result = await res.json();
