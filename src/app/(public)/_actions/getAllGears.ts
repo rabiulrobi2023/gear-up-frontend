@@ -1,12 +1,17 @@
 "use server";
-import { backendBaseUrl } from "@/app/utils/url";
+import { getQueryUrl } from "@/app/utils/url";
+import { IQueryParams } from "@/interface/common.interface";
 
-import {  IGearResponse } from "@/interface/gear.interface";
+import { IGearResponse } from "@/interface/gear.interface";
 
-export const getAllGears = async (): Promise<IGearResponse> => {
-  const res = await fetch(`${backendBaseUrl}/gear`, {
+export const getAllGears = async ({
+  query,
+}: IQueryParams): Promise<IGearResponse> => {
+  const queryUrl = await getQueryUrl({ query }, "/gear");
+
+  const res = await fetch(queryUrl, {
     method: "GET",
-    next: { revalidate: 1 * 24 * 60 * 60, tags: ["gears"] },
+    next: { tags: ["gears"] },
     cache: "force-cache",
   });
   const result = await res.json();

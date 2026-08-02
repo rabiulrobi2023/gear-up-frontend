@@ -28,7 +28,7 @@ export function GearCard({ gear }: GearCardProps) {
         />
 
         <CardHeader>
-          <CardTitle>{gear.name}</CardTitle>
+          <CardTitle className="line-clamp-1">{gear.name}</CardTitle>
           <p className="text-sm text-muted-foreground">
             <span>Category: </span>
             {gear.category.name}
@@ -37,10 +37,12 @@ export function GearCard({ gear }: GearCardProps) {
 
         <CardContent className="space-y-1 mt-auto">
           <p>
-            <span className="font-medium">Brand:</span> {gear.dailyRate} TK
+            <span className="font-medium">Brand:</span>
+            {gear.brand}
           </p>
           <p>
-            <span className="font-medium">Daily Rate:</span> {gear.dailyRate} TK
+            <span className="font-medium">Daily Rate:</span> BDT{" "}
+            {gear.dailyRate} TK
           </p>
 
           <p>

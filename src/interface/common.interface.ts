@@ -4,3 +4,7 @@ export interface IMetaData {
   total: number;
   totalPage: number;
 }
+
+export interface IQueryParams {
+  query?: Record<string, string | string[] | undefined>;
+}
