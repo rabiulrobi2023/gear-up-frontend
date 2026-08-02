@@ -1,12 +1,12 @@
-export interface IProvider {
-  name: string;
-  email: string;
-  phone: string;
-}
+import { IMetaData } from "./common.interface";
 
-export interface ICategory {
-  id: string;
-  name: string;
+export interface IGearResponse {
+  success: boolean;
+  message: string;
+  data: {
+    data: IGear[];
+    metadata: IMetaData;
+  };
 }
 
 export interface IGear {
@@ -22,6 +22,17 @@ export interface IGear {
   isAvailable: boolean;
   createdAt: string;
   updatedAt: string;
-  category: ICategory;
-  provider: IProvider;
+  category: Category;
+  provider: Provider;
+}
+
+interface Provider {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
 }

@@ -15,9 +15,11 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { IApiResponse, IUser } from "@/interface";
-import { PUBLIC_NAVBAR_ITEMS } from "../../_constants";
+import { IApiResponse,  } from "@/interface";
+
 import UserDropdownMenu from "../../../../components/shared/UserDropdownMenu";
+import { PUBLIC_NAVBAR_ITEMS } from "@/constants";
+import { IUser } from "@/interface/user.interface";
 
 
 interface PublicNavbarProps {
@@ -30,7 +32,7 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
   const currentUser = user?.data;
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background px-3 md:px-0">
+    <header className="sticky top-0 z-50 border-b bg-background px-2 md:px-0">
       <div className="container mx-auto flex h-14 items-center justify-between">
         {/* Left */}
         <div className="flex items-center gap-2">

@@ -1,8 +1,9 @@
 "use server";
 
-import { IApiResponse, ICategory } from "@/interface";
+import { IApiResponse } from "@/interface";
 
 import { CategoryCard } from "./CategoryCard";
+import { ICategory } from "@/interface/category.interface";
 
 const CategoryList = async ({
   categories,
@@ -17,9 +18,8 @@ const CategoryList = async ({
     );
   }
 
-
   return (
-    <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-5 ">
+    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
       {categories?.data?.map((category) => (
         <CategoryCard key={category.id} category={category} />
       ))}

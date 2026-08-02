@@ -12,22 +12,6 @@ export interface IApiResponse<T> {
   };
 }
 
-export interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-  status: UserStatus;
-  phone: string;
-  address: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
-export interface ICategory {
-  id: string;
-  name: string;
-  categoryPhoto: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
+

@@ -20,7 +20,7 @@ const images = [
 export default function HeroSection() {
   return (
     <Carousel
-      className="w-full mx-auto mt-0 rounded-0 md:p0"
+      className="w-full mx-auto mt-0 rounded-0"
       plugins={[
         Autoplay({
           delay: 6000,
@@ -42,7 +42,7 @@ export default function HeroSection() {
       <CarouselContent>
         {images.map((image, index) => (
           <CarouselItem key={index}>
-            <div className="relative h-[400px] w-full">
+            <div className="relative h-[300px] lg:h-[500px] w-full">
               <Image
                 unoptimized
                 src={image}
@@ -51,6 +51,7 @@ export default function HeroSection() {
                 className="object-cover"
                 priority={index === 0}
               />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
             </div>
           </CarouselItem>
         ))}

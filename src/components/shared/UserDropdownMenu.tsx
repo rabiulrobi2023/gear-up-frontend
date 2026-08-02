@@ -9,7 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IApiResponse, IUser } from "@/interface";
+import { IApiResponse,  } from "@/interface";
+import { IUser } from "@/interface/user.interface";
 import { LayoutDashboard, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 
