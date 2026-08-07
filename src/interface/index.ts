@@ -1,5 +1,3 @@
-import { Role, UserStatus } from "@/constants";
-
 export interface IApiResponse<T> {
   success: boolean;
   message: string;
@@ -11,7 +9,3 @@ export interface IApiResponse<T> {
     totalPage: number;
   };
 }
-
-
-
-

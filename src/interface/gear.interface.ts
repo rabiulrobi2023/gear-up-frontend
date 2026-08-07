@@ -4,8 +4,8 @@ export interface IGearResponse {
   success: boolean;
   message: string;
   data: {
-    data: IGear[];
-    metadata: IMetaData;
+    data: IGear | IGear[];
+    metadata?: IMetaData;
   };
 }
 

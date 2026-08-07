@@ -51,14 +51,14 @@ export default function HeroSection() {
                 className="object-cover"
                 priority={index === 0}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/10" />
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
 
-      <CarouselPrevious className=" md:flex ml-12 bg-transparent " />
-      <CarouselNext className=" md:flex mr-12 bg-transparent" />
+      <CarouselPrevious className=" md:flex ml-12 bg-transparent text-white" />
+      <CarouselNext className=" md:flex mr-12 bg-transparent text-white" />
     </Carousel>
   );
 }

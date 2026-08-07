@@ -1,7 +1,7 @@
 import React from "react";
 
 const GearPage = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  return <div className="container mx-auto">{children}</div>;
 };
 
 export default GearPage;

@@ -38,3 +38,6 @@ export const PUBLIC_NAVBAR_ITEMS = [
   { label: "Contact", href: "/contact" },
   { label: "All Gear", href: "/gear" },
 ] as const;
+
+export const defaultImage =
+  "https://praise.com.sg/wp-content/uploads/2024/08/gallery-33.png";

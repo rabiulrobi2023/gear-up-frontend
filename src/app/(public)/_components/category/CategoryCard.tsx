@@ -4,14 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import {  } from "@/interface";
+import {} from "@/interface";
 import { ICategory } from "@/interface/category.interface";
 
-interface CategoryCardProps {
-  category: ICategory;
-}
-
-export function CategoryCard({ category }: CategoryCardProps) {
+export function CategoryCard({ category }: { category: ICategory }) {
   return (
     <Link href={`/${category.slug}`}>
       {" "}

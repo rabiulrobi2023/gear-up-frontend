@@ -3,12 +3,12 @@
 import { IApiResponse } from "@/interface";
 
 import { CategoryCard } from "./CategoryCard";
-import { ICategory } from "@/interface/category.interface";
+import { ICategoryResponse } from "@/interface/category.interface";
 
 const CategoryList = async ({
   categories,
 }: {
-  categories: IApiResponse<ICategory[]>;
+  categories: ICategoryResponse;
 }) => {
   if (!categories?.data?.length) {
     return (

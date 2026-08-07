@@ -15,12 +15,11 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { IApiResponse,  } from "@/interface";
+import { IApiResponse } from "@/interface";
 
 import UserDropdownMenu from "../../../../components/shared/UserDropdownMenu";
 import { PUBLIC_NAVBAR_ITEMS } from "@/constants";
 import { IUser } from "@/interface/user.interface";
-
 
 interface PublicNavbarProps {
   user?: IApiResponse<IUser> | null;
@@ -32,22 +31,15 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
   const currentUser = user?.data;
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background px-2 md:px-0">
-      <div className="container mx-auto flex h-14 items-center justify-between">
+    <header className="sticky top-0 z-50 border-b bg-background px-2 md:px-0 mb-4">
+      <div className="container mx-auto flex h-14 items-center justify-between ">
         {/* Left */}
         <div className="flex items-center gap-2">
           <Sheet>
-            <SheetTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="md:hidden"
-                  aria-label="Open navigation menu"
-                />
-              }
-            >
-              <Menu className="size-5" />
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="size-5" />
+              </Button>
             </SheetTrigger>
 
             <SheetContent side="left" className="w-72">
@@ -60,21 +52,18 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
 
               <nav className="mt-4 flex flex-col gap-2">
                 {PUBLIC_NAVBAR_ITEMS.map((item) => (
-                  <SheetClose
-                    key={item.href}
-                    render={
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                          pathname === item.href
-                            ? "bg-accent text-foreground"
-                            : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                        )}
-                      />
-                    }
-                  >
-                    {item.label}
+                  <SheetClose key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                        pathname === item.href
+                          ? "bg-accent text-foreground"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
                   </SheetClose>
                 ))}
               </nav>
@@ -97,7 +86,7 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === item.href
                   ? "bg-accent text-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
             >
               {item.label}

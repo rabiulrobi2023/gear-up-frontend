@@ -12,7 +12,7 @@ export const getAllGears = async ({
   const res = await fetch(queryUrl, {
     method: "GET",
     next: { tags: ["gears"] },
-    cache: "force-cache",
+    cache: "no-cache",
   });
   const result = await res.json();
   return result;
