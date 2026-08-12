@@ -13,12 +13,10 @@ export const loginAction = async (
   _previousState: ILoginResponse | null,
   formData: FormData,
 ): Promise<ILoginResponse> => {
-  const payload = {
-    email: formData.get("email")?.toString().trim(),
-    password: formData.get("password"),
-  };
+  const email = formData.get("email")?.toString().trim();
+  const password = formData.get("password")?.toString();
 
-  if (!payload.email || !payload.password) {
+  if (!email || !password) {
     return {
       success: false,
       message: "Email and password are required",
@@ -31,7 +29,10 @@ export const loginAction = async (
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     });
 
     const result: ILoginResponse = await res.json();
@@ -43,18 +44,29 @@ export const loginAction = async (
       };
     }
 
-    const { accessToken, refreshToken } = result?.data;
+    const { accessToken, refreshToken } = result.data;
+
     await setAccessTokenIntoCookie(accessToken);
+
     await setRefreshTokenIntoCookie(refreshToken);
   } catch (error) {
-    console.error("Login error: ", error);
+    console.error("Login error:", error);
+
     return {
       success: false,
       message: "Something went wrong. Please try again",
     };
   }
-  if (redirectTo) {
-    redirect(redirectTo);
-  }
-  redirect("/");
+
+
+  const destination =
+    redirectTo && redirectTo.startsWith("/")
+      ? redirectTo
+      : "/";
+
+  const separator = destination.includes("?")
+    ? "&"
+    : "?";
+
+  redirect(`${destination}${separator}login=success`);
 };

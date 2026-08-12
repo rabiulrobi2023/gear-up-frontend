@@ -12,7 +12,7 @@ const GearDetails = ({ gear }: { gear: IGear }) => {
           {" "}
           <Image
             unoptimized
-            src={gear.image || defaultImage}
+            src={gear?.image || defaultImage}
             height={900}
             width={600}
             alt={gear.name}
