@@ -1,10 +1,13 @@
 import React from "react";
 import { PublicNavbar } from "./_components/shared/PublicNavbar";
+import { getMe } from "../(auth)/_service/getMe";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children }: { children: React.ReactNode }) => {
+  const user = await getMe();
+
   return (
     <div>
-      <PublicNavbar />
+      <PublicNavbar user={user} />
       {children}
     </div>
   );

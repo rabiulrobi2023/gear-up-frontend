@@ -1,5 +1,11 @@
 import { Role, UserStatus } from "@/constants";
 
+export interface IUserResponse {
+  success: boolean;
+  message: string;
+  data: IUser | null;
+}
+
 export interface IUser {
   id: string;
   name: string;

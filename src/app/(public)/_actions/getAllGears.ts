@@ -1,5 +1,5 @@
 "use server";
-import { getQueryUrl } from "@/app/utils/url";
+import { getQueryUrl } from "@/utils/url";
 import { IQueryParams } from "@/interface/common.interface";
 
 import { IGearResponse } from "@/interface/gear.interface";

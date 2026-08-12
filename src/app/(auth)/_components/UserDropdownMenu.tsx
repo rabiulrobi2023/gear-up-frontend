@@ -1,5 +1,5 @@
-
-import { DASHBOARD_ROUTES } from "@/app/(dashboard)/_constants";
+"use client";
+import { logout } from "@/app/(auth)/_service/logOut";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,18 +9,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IApiResponse,  } from "@/interface";
-import { IUser } from "@/interface/user.interface";
+import { Role } from "@/constants";
+import { DASHBOARD_ROUTES } from "@/constants/proxy.constant";
+import { IApiResponse } from "@/interface";
+import { IUser, IUserResponse } from "@/interface/user.interface";
 import { LayoutDashboard, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
+const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
+  const router = useRouter();
 
-
-const UserDropdownMenu = ({ user }: { user?: IApiResponse<IUser> }) => {
-// const router = useRouter()
-  
-    const dashboardHref =
-    DASHBOARD_ROUTES[user?.data?.role as keyof typeof DASHBOARD_ROUTES] ?? "/";
+  const dashboardHref =
+    DASHBOARD_ROUTES[user?.data?.role as keyof typeof Role] ?? "/";
 
   const userMenuItems = [
     {
@@ -40,22 +42,22 @@ const UserDropdownMenu = ({ user }: { user?: IApiResponse<IUser> }) => {
     },
   ];
 
-    // const handleLogout = async () => {
-    //   try {
-    //     await logout();
+  const handleLogout = async () => {
+    try {
+      await logout();
 
-    //     toast.success("User logged out successfully!");
+      toast.success("User logged out successfully!");
 
-    //     router.replace("/");
-    //     router.refresh();
-    //   } catch {
-    //     toast.error("Failed to log out.");
-    //   }
-    // };
+      router.replace("/");
+      router.refresh();
+    } catch {
+      toast.error("Failed to log out.");
+    }
+  };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
@@ -82,7 +84,7 @@ const UserDropdownMenu = ({ user }: { user?: IApiResponse<IUser> }) => {
           const Icon = item.icon;
 
           return (
-            <DropdownMenuItem key={item.href}>
+            <DropdownMenuItem asChild key={item.href}>
               <Link href={item.href}>
                 <Icon className="mr-2 size-4" />
                 {item.label}
@@ -93,7 +95,7 @@ const UserDropdownMenu = ({ user }: { user?: IApiResponse<IUser> }) => {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem variant="destructive" onClick={handleLogout}>
           <LogOut className="mr-2 size-4" />
           Log out
         </DropdownMenuItem>

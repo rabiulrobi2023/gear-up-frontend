@@ -1,5 +1,5 @@
 "use server";
-import { backendBaseUrl } from "@/app/utils/url";
+import { backendBaseUrl } from "@/utils/url";
 
 import { ICategoryResponse } from "@/interface/category.interface";
 

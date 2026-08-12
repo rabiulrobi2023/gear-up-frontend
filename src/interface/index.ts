@@ -1,7 +1,7 @@
 export interface IApiResponse<T> {
   success: boolean;
   message: string;
-  data: T;
+  data: T | null;
   metadata?: {
     page: number;
     limit: number;

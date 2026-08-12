@@ -1,4 +1,4 @@
-import { backendBaseUrl } from "@/app/utils/url";
+import { backendBaseUrl } from "@/utils/url";
 import { IGearResponse } from "@/interface/gear.interface";
 
 export const getSingleGear = async (gearId: string): Promise<IGearResponse> => {

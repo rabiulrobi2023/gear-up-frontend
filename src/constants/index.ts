@@ -2,7 +2,7 @@ export enum Role {
   ADMIN = "ADMIN",
   CUSTOMER = "CUSTOMER",
   PROVIDER = "PROVIDER",
-}
+} 
 
 export enum UserStatus {
   ACTIVE = "ACTIVE",
@@ -41,3 +41,8 @@ export const PUBLIC_NAVBAR_ITEMS = [
 
 export const defaultImage =
   "https://praise.com.sg/wp-content/uploads/2024/08/gallery-33.png";
+
+export enum TokenNames {
+  ACCESS_TOKEN = "accessToken",
+  REFRESH_TOKEN = "refreshToken",
+}

@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 import { IApiResponse } from "@/interface";
 
-import UserDropdownMenu from "../../../../components/shared/UserDropdownMenu";
+import UserDropdownMenu from "../../../(auth)/_components/UserDropdownMenu";
 import { PUBLIC_NAVBAR_ITEMS } from "@/constants";
 import { IUser } from "@/interface/user.interface";
 
@@ -100,7 +100,7 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
             <UserDropdownMenu user={user} />
           ) : (
             <Link
-              href="/login"
+              href="/auth/login"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
               Login

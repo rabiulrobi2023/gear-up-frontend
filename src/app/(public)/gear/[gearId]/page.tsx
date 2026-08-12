@@ -9,7 +9,7 @@ const SingleGear = async ({
 }) => {
   const { gearId } = await params;
   const gear = await getSingleGear(gearId);
-  console.log(gear)
+
   return (
     <div>
       <GearDetails gear={gear.data.data as IGear} />
