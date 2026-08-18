@@ -1,6 +1,7 @@
-import z from "zod/v3";
+import z from "zod";
 
-export const loginFormSchema = z.object({
+
+export const loginSchema = z.object({
   email: z
     .string()
     .trim()

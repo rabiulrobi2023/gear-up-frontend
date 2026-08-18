@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Roboto, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
-import { AuthToast } from "./(auth)/_components/AuthToast";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -42,7 +41,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col text-[15px] px-2 md:px-0">
         {children}
         <Toaster richColors position="top-right" duration={2000} />
-        <AuthToast />
       </body>
     </html>
   );

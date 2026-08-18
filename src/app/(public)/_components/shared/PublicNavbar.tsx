@@ -31,7 +31,7 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
   const currentUser = user?.data;
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background px-2 md:px-0 mb-4">
+    <header className="sticky top-0 z-50 border-b bg-background px-2 md:px-0">
       <div className="container mx-auto flex h-14 items-center justify-between ">
         {/* Left */}
         <div className="flex items-center gap-2">
@@ -95,16 +95,20 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
         </nav>
 
         {/* Right */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {currentUser ? (
             <UserDropdownMenu user={user} />
           ) : (
-            <Link
-              href="/auth/login"
-              className={cn(buttonVariants({ variant: "outline" }))}
-            >
-              Login
-            </Link>
+            <>
+              <Link href="/auth/login" className="text-primary hover:text-cyan-600">
+                Login
+              </Link>
+              <span className="text-primary font-bold">|</span>
+
+              <Link href="/auth/register" className="text-primary hover:text-cyan-600">
+                Register
+              </Link>
+            </>
           )}
         </div>
       </div>

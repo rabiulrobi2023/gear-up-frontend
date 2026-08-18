@@ -7,13 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { ILoginFormValues } from "@/interface/auth.interface";
-import { loginFormSchema } from "@/validation/loginFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useActionState, useEffect, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginAction } from "../_actions/loginAction";
+import { loginSchema } from "@/validation/loginSchema";
 
 export function LoginForm() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export function LoginForm() {
   const redirectTo = searchParams.get("redirectTo") || "/";
 
   const form = useForm<ILoginFormValues>({
-    resolver: zodResolver(loginFormSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "provider1@gmail.com",
       password: "111111",
@@ -37,7 +37,6 @@ export function LoginForm() {
 
   const [pending, startTransition] = useTransition();
 
-  
   const onSubmit = (values: ILoginFormValues) => {
     const formData = new FormData();
 
@@ -49,7 +48,6 @@ export function LoginForm() {
     });
   };
 
-
   useEffect(() => {
     if (!state) {
       return;
@@ -59,17 +57,13 @@ export function LoginForm() {
       toast.error(state.message || "Login failed");
     }
 
-    toast.success("Login successfully")
+    toast.success("Login successfully");
   }, [state]);
-
 
   return (
     <>
       <CardContent>
-        <form
-          id="login-form"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
+        <form id="login-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             {/* Email */}
             <Controller
@@ -89,9 +83,7 @@ export function LoginForm() {
                   />
 
                   {fieldState.invalid && (
-                    <FieldError
-                      errors={[fieldState.error]}
-                    />
+                    <FieldError errors={[fieldState.error]} />
                   )}
                 </Field>
               )}
@@ -115,9 +107,7 @@ export function LoginForm() {
                   />
 
                   {fieldState.invalid && (
-                    <FieldError
-                      errors={[fieldState.error]}
-                    />
+                    <FieldError errors={[fieldState.error]} />
                   )}
                 </Field>
               )}
@@ -148,7 +138,7 @@ export function LoginForm() {
           <Button
             type="button"
             variant="link"
-            onClick={() => router.push("/register")}
+            onClick={() => router.push("/auth/register")}
           >
             Sign Up
           </Button>
