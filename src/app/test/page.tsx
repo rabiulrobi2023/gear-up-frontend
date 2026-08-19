@@ -36,7 +36,7 @@ export default function GearFilterNavbar({
   });
 
   const onSubmit = (values: FilterFormValues) => {
-    console.log(values);
+
   };
 
   return (

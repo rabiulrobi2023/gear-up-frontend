@@ -1,13 +1,14 @@
 "use server";
 
-import { IOrderResponse } from "@/interface/order.interfac";
+
+import { ICreateOrderResponse } from "@/interface/order.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
 
 export const placeOrder = async (
-  _previousState: IOrderResponse | null,
+  _previousState: ICreateOrderResponse | null,
   formData: FormData,
-): Promise<IOrderResponse> => {
+): Promise<ICreateOrderResponse> => {
   const itemId = formData.get("itemId");
   const quantity = Number(formData.get("quantity"));
   const startDate = formData.get("startDate");
@@ -34,7 +35,7 @@ export const placeOrder = async (
       headers,
     });
 
-    const result: IOrderResponse = await res.json();
+    const result: ICreateOrderResponse = await res.json();
     if (!res.ok || !result.success || !result.data) {
       return {
         success: false,

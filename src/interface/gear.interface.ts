@@ -9,6 +9,12 @@ export interface IAllGearResponse {
   };
 }
 
+export interface ISingleGearResponse {
+  success: boolean;
+  message: string;
+  data?: IGear
+}
+
 export interface IGear {
   id: string;
   name: string;

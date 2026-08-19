@@ -24,7 +24,7 @@ import React, {
   useState,
   useTransition,
 } from "react";
-import { ICreateOrder } from "@/interface/order.interfac";
+
 import { useRouter } from "next/navigation";
 import { createOrderSchema } from "@/validation/createOrderSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,11 +39,12 @@ import { addDays, differenceInCalendarDays, format } from "date-fns";
 import { Spinner } from "../../../../components/ui/spinner";
 import { placeOrder } from "../../_actions/placeOrder";
 import { toast } from "sonner";
+import { ICreateOrderPayload } from "@/interface/order.interface";
 
 export function OrderDialog({ gear }: { gear: IGear }) {
   const router = useRouter();
 
-  const form = useForm<ICreateOrder>({
+  const form = useForm<ICreateOrderPayload>({
     resolver: zodResolver(createOrderSchema(gear)),
     mode: "all",
     defaultValues: {
@@ -75,9 +76,9 @@ export function OrderDialog({ gear }: { gear: IGear }) {
 
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = (values: ICreateOrder) => {
+  const onSubmit = (values: ICreateOrderPayload) => {
     const formData = new FormData();
-    console.log(values);
+
     formData.append("itemId", gear.id);
     formData.append("quantity", values.quantity.toString());
     formData.append("startDate", values.startDate.toISOString());
