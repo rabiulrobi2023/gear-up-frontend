@@ -1,6 +1,6 @@
 "use client";
-import { OrderDialog } from "@/components/order/OrderDialog";
-import { Button } from "@/components/ui/button";
+
+import { OrderDialog } from "@/app/(order)/_components/order/OrderDialog";
 import { defaultImage } from "@/constants";
 import { IGear } from "@/interface/gear.interface";
 import Image from "next/image";
@@ -29,7 +29,7 @@ const GearDetails = ({ gear }: { gear: IGear }) => {
             <p>Available: {gear?.stock}</p>
             <p>Price: {gear.dailyRate}TK/day</p>
           </div>
-          <OrderDialog gear={gear}/>
+          <OrderDialog gear={gear} />
         </div>
       </div>
       <div>

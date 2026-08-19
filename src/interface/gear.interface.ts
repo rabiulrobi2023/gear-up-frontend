@@ -1,10 +1,10 @@
 import { IMetaData } from "./common.interface";
 
-export interface IGearResponse {
+export interface IAllGearResponse {
   success: boolean;
   message: string;
   data: {
-    data: IGear | IGear[];
+    data: IGear[];
     metadata?: IMetaData;
   };
 }

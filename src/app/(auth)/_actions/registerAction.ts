@@ -48,7 +48,6 @@ export const registerAction = async (
     };
   } catch (error) {
     console.error("Registration error:", error);
-
     return {
       success: false,
       message: "Something went wrong. Please try again",

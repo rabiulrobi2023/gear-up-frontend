@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { IGear } from "@/interface/gear.interface";
 import Image from "next/image";
 
-import RequiredLabel from "../shared/RequiredLabel";
+import RequiredLabel from "../../../../components/shared/RequiredLabel";
 import { Controller, useForm } from "react-hook-form";
 import React, {
   useActionState,
@@ -28,11 +28,17 @@ import { ICreateOrder } from "@/interface/order.interfac";
 import { useRouter } from "next/navigation";
 import { createOrderSchema } from "@/validation/createOrderSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../../../components/ui/popover";
 import { CalendarDays, CalendarRangeIcon, ChevronDownIcon } from "lucide-react";
-import { Calendar } from "../ui/calendar";
+import { Calendar } from "../../../../components/ui/calendar";
 import { addDays, differenceInCalendarDays, format } from "date-fns";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../../../../components/ui/spinner";
+import { placeOrder } from "../../_actions/placeOrder";
+import { toast } from "sonner";
 
 export function OrderDialog({ gear }: { gear: IGear }) {
   const router = useRouter();
@@ -65,34 +71,33 @@ export function OrderDialog({ gear }: { gear: IGear }) {
     totalDay * quantity * Number(gear.dailyRate),
   ).toFixed(2);
 
-  //   const [state, formAction] = useActionState(registerAction, null);
+  const [state, formAction] = useActionState(placeOrder, null);
 
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = (values: ICreateOrder) => {
     const formData = new FormData();
     console.log(values);
-
+    formData.append("itemId", gear.id);
     formData.append("quantity", values.quantity.toString());
     formData.append("startDate", values.startDate.toISOString());
     formData.append("returnDate", values.returnDate.toISOString());
 
-    // startTransition(() => {
-    //   formAction(formData);
-    // });
+    startTransition(() => {
+      formAction(formData);
+    });
   };
 
-  //   useEffect(() => {
-  //     if (!state) return;
+  useEffect(() => {
+    if (!state) return;
 
-  //     if (state.success) {
-  //       toast.success(state.message || "User registered successfully");
-
-  //       router.replace("/auth/login");
-  //     } else {
-  //       toast.error(state.message || "User registration failed");
-  //     }
-  //   }, [state, router]);
+    if (state.success) {
+      toast.success(state.message || "User registered successfully");
+      router.replace(`/dashboard/customer/orders/${state?.data?.id}/pay`);
+    } else {
+      toast.error(state.message || "User registration failed");
+    }
+  }, [state, router]);
 
   return (
     <Dialog>

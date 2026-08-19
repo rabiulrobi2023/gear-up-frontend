@@ -6,7 +6,7 @@ export type ICreateOrder = z.infer<ReturnType<typeof createOrderSchema>>;
 export interface IOrderResponse {
   success: boolean;
   message: string;
-  data: IOrder;
+  data: IOrder | null;
 }
 
 export enum OrderStatus {

@@ -1,10 +1,9 @@
 "use server";
 
-import { IGearResponse } from "@/interface/gear.interface";
+import { IAllGearResponse } from "@/interface/gear.interface";
 import { GearCard } from "./GearCard";
 
-const GearList = async ({ gears }: { gears: IGearResponse }) => {
-
+const GearList = async ({ gears }: { gears: IAllGearResponse }) => {
   if (!gears) {
     return (
       <div className="py-10 text-center text-muted-foreground">
