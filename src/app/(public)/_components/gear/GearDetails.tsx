@@ -1,4 +1,5 @@
 "use client";
+import { OrderDialog } from "@/components/order/OrderDialog";
 import { Button } from "@/components/ui/button";
 import { defaultImage } from "@/constants";
 import { IGear } from "@/interface/gear.interface";
@@ -20,7 +21,7 @@ const GearDetails = ({ gear }: { gear: IGear }) => {
           />
         </div>
 
-        <div className="space-y-3 flex-3 mb-3">
+        <div className="space-y-3 flex mb-3 flex-col justify-between">
           <div className="space-y-2">
             <h1 className="font-bold text-xl">{gear.name}</h1>
             <p>Category: {gear.category.name}</p>
@@ -28,7 +29,7 @@ const GearDetails = ({ gear }: { gear: IGear }) => {
             <p>Available: {gear?.stock}</p>
             <p>Price: {gear.dailyRate}TK/day</p>
           </div>
-          <Button>Rent Now</Button>
+          <OrderDialog gear={gear}/>
         </div>
       </div>
       <div>

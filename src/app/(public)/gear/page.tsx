@@ -1,10 +1,8 @@
-
 import { getAllGears } from "../_actions/getAllGears";
 import GearList from "../_components/gear/GearList";
 
 import { getAllCategories } from "../_actions/getAllCategories";
 import { GearFilterNavbar } from "../_components/shared/GearFilteringNavbar";
-
 
 const LandingPage = async ({
   searchParams,
@@ -12,7 +10,7 @@ const LandingPage = async ({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) => {
   const query = await searchParams;
-  const categories = await getAllCategories()
+  const categories = await getAllCategories();
 
   const gears = await getAllGears({ query });
   return (

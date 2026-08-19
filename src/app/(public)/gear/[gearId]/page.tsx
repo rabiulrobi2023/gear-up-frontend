@@ -11,7 +11,7 @@ const SingleGear = async ({
   const gear = await getSingleGear(gearId);
 
   return (
-    <div>
+    <div className="mt-4 max-w-lg mx-auto">
       <GearDetails gear={gear.data.data as IGear} />
     </div>
   );

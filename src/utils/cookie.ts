@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { envVar } from "@/config/envConfig";
 import { NodeEnv, TokenNames } from "@/constants";

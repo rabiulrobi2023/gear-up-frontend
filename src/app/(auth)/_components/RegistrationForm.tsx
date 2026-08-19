@@ -26,6 +26,7 @@ import { registerAction } from "../_actions/registerAction";
 const RegistrationForm = () => {
   const router = useRouter();
 
+
   const form = useForm<IRegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: "all",
@@ -65,7 +66,7 @@ const RegistrationForm = () => {
     if (state.success) {
       toast.success(state.message || "User registered successfully");
 
-      router.push("auth/login");
+      router.replace("/auth/login");
     } else {
       toast.error(state.message || "User registration failed");
     }
