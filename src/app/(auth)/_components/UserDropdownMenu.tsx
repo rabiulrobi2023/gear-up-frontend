@@ -9,37 +9,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Role } from "@/constants";
+
 import { DASHBOARD_ROUTES } from "@/constants/proxy.constant";
-import { IApiResponse } from "@/interface";
-import { IUser, IUserResponse } from "@/interface/user.interface";
-import { LayoutDashboard, LogOut, Settings, User } from "lucide-react";
+
+import { IRole, IUserResponse } from "@/interface/user.interface";
+import { LayoutDashboard, LogOut,  User } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
   const router = useRouter();
 
-  const dashboardHref =
-    DASHBOARD_ROUTES[user?.data?.role as keyof typeof Role] ?? "/";
+  const dashboardHref = DASHBOARD_ROUTES[user?.data?.role as IRole] ;
+  const pathName = usePathname();
+const isDashboardRoute = pathName.startsWith("/dashboard")
 
   const userMenuItems = [
     {
-      label: "Dashboard",
+      label: isDashboardRoute ? "Exit From Dashboard" : "Dashboard",
       icon: LayoutDashboard,
-      href: dashboardHref,
+      href: isDashboardRoute?"/":dashboardHref,
     },
-    {
-      label: "Profile",
-      icon: User,
-      href: "/profile",
-    },
-    {
-      label: "Settings",
-      icon: Settings,
-      href: "/settings",
-    },
+    // {
+    //   label: "Profile",
+    //   icon: User,
+    //   href: "/profile",
+    // },
+    // {
+    //   label: "Settings",
+    //   icon: Settings,
+    //   href: "/settings",
+    // },
   ];
 
   const handleLogout = async () => {

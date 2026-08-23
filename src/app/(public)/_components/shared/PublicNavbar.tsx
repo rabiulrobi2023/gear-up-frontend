@@ -12,14 +12,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { IApiResponse } from "@/interface";
 
 import UserDropdownMenu from "../../../(auth)/_components/UserDropdownMenu";
-import { PUBLIC_NAVBAR_ITEMS } from "@/constants";
+
 import { IUser } from "@/interface/user.interface";
+import { PUBLIC_NAVBAR_ITEMS } from "@/constants/menuItems.constant";
 
 interface PublicNavbarProps {
   user?: IApiResponse<IUser> | null;
@@ -100,12 +101,18 @@ export function PublicNavbar({ user }: PublicNavbarProps) {
             <UserDropdownMenu user={user} />
           ) : (
             <>
-              <Link href="/auth/login" className="text-primary hover:text-cyan-600">
+              <Link
+                href="/auth/login"
+                className="text-primary hover:text-cyan-600"
+              >
                 Login
               </Link>
               <span className="text-primary font-bold">|</span>
 
-              <Link href="/auth/register" className="text-primary hover:text-cyan-600">
+              <Link
+                href="/auth/register"
+                className="text-primary hover:text-cyan-600"
+              >
                 Register
               </Link>
             </>

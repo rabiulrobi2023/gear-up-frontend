@@ -1,5 +1,6 @@
 import { envVar } from "@/config/envConfig";
-import { NodeEnv } from ".";
+
+import { NodeEnv, Role } from "./auth.constant";
 
 export const AUTH_ROUTES = ["/auth/login", "/auth/register"];
 export const PUBLIC_ROUTES = ["/", "/gear"];
@@ -10,9 +11,6 @@ export const COOKIE_OPTIONS = {
   sameSite: "lax" as const,
   path: "/",
 };
-
-
-import { Role } from "@/constants";
 
 export const DASHBOARD_ROUTES = {
   [Role.ADMIN]: "/dashboard/admin",

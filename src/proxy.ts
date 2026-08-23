@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { NodeEnv, Role, TokenNames } from "./constants";
+
 import { verifyJwtToken } from "./utils/jwt";
 import { envVar } from "./config/envConfig";
 import { getNewAccessAndRefreshToken } from "./app/(auth)/_service/getNewAccessAndRefreshToken.ts";
@@ -17,6 +17,7 @@ import {
   DASHBOARD_ROUTES,
   PUBLIC_ROUTES,
 } from "./constants/proxy.constant";
+import { Role, TokenNames } from "./constants/auth.constant";
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();

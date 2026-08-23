@@ -1,9 +1,9 @@
 "use server";
 
-
 import { ICreateOrderResponse } from "@/interface/order.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
+import { redirect } from "next/navigation";
 
 export const placeOrder = async (
   _previousState: ICreateOrderResponse | null,
@@ -15,12 +15,9 @@ export const placeOrder = async (
   const returnDate = formData.get("returnDate");
 
   const headers = await getAuthenticatedHeaders();
+
   if (!headers) {
-    return {
-      success: false,
-      message: "Authentication problem",
-      data: null,
-    };
+    redirect(`/auth/login?redirectTo=${encodeURIComponent(`/gear/${itemId}`)}`);
   }
 
   try {

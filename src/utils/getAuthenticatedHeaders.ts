@@ -1,6 +1,6 @@
 "use server";
 
-import { TokenNames } from "@/constants";
+import { TokenNames } from "@/constants/auth.constant";
 import { getAccessTokenFromCookie } from "./cookie";
 
 export const getAuthenticatedHeaders =

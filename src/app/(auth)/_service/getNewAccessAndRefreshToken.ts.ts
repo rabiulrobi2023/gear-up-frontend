@@ -1,6 +1,7 @@
 "use sever";
 import { envVar } from "@/config/envConfig";
-import { TokenNames } from "@/constants";
+import { TokenNames } from "@/constants/auth.constant";
+
 import { IRefreshTokenResponse } from "@/interface/auth.interface";
 import { cookies } from "next/headers";
 

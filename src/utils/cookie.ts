@@ -1,7 +1,8 @@
 "use server";
 
 import { envVar } from "@/config/envConfig";
-import { NodeEnv, TokenNames } from "@/constants";
+import { NodeEnv, TokenNames } from "@/constants/auth.constant";
+
 import ms, { StringValue } from "ms";
 import { cookies } from "next/headers";
 

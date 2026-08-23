@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Spinner } from "@/components/ui/spinner";
-import { Role } from "@/constants";
+
 import { IRegisterFormValues } from "@/interface/auth.interface";
 import { registerSchema } from "@/validation/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +22,7 @@ import { useActionState, useEffect, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/registerAction";
+import { Role } from "@/constants/auth.constant";
 
 const RegistrationForm = () => {
   const router = useRouter();

@@ -1,4 +1,7 @@
-import { Role, UserStatus } from "@/constants";
+import { Role, UserStatus } from "@/constants/auth.constant";
+
+
+export type IRole = keyof typeof Role
 
 export interface IUserResponse {
   success: boolean;
