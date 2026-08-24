@@ -1,7 +1,8 @@
 "use client";
 
 import { OrderDialog } from "@/app/(order)/_components/order/OrderDialog";
-import { defaultImage } from "@/constants";
+import { defaultImage } from "@/constants/image.constant";
+
 import { IGear } from "@/interface/gear.interface";
 import Image from "next/image";
 
@@ -17,7 +18,7 @@ const GearDetails = ({ gear }: { gear: IGear }) => {
             height={900}
             width={600}
             alt={gear.name}
-            className="w-[300px]  h-[300px] object-center mx-auto md:mx-0"
+            className="w-[300px]  object-center mx-auto md:mx-0"
           />
         </div>
 

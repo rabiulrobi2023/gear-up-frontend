@@ -15,6 +15,7 @@ const PaymentInitiatePage = async ({
   params: Promise<{ orderId: string }>;
 }) => {
   const orderId = (await params).orderId;
+  console.log(orderId)
   const order = await getSingleOrder(orderId);
 
   return (

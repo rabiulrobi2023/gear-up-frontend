@@ -11,25 +11,28 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { DASHBOARD_ROUTES } from "@/constants/proxy.constant";
+import { Role } from "@/interface/auth.interface";
 
-import { IRole, IUserResponse } from "@/interface/user.interface";
-import { LayoutDashboard, LogOut,  User } from "lucide-react";
+import { IUserResponse } from "@/interface/user.interface";
+import { getInitial } from "@/utils/getInitial";
+import { LayoutDashboard, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
   const router = useRouter();
+  const initial = getInitial(user?.data?.name as string);
 
-  const dashboardHref = DASHBOARD_ROUTES[user?.data?.role as IRole] ;
+  const dashboardHref = DASHBOARD_ROUTES[user?.data?.role as Role];
   const pathName = usePathname();
-const isDashboardRoute = pathName.startsWith("/dashboard")
+  const isDashboardRoute = pathName.startsWith("/dashboard");
 
   const userMenuItems = [
     {
       label: isDashboardRoute ? "Exit From Dashboard" : "Dashboard",
       icon: LayoutDashboard,
-      href: isDashboardRoute?"/":dashboardHref,
+      href: isDashboardRoute ? "/" : dashboardHref,
     },
     // {
     //   label: "Profile",
@@ -60,14 +63,11 @@ const isDashboardRoute = pathName.startsWith("/dashboard")
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
           size="icon"
-          className="rounded-full"
+          className="rounded-full w-10 h-10 bg-primary text-xl font-bold border-2 border-gray-600"
           aria-label="Open user menu"
         >
-          <div className="flex size-8 items-center justify-center rounded-full bg-primary/10">
-            <User className="size-4 text-primary" />
-          </div>
+          {initial}
         </Button>
       </DropdownMenuTrigger>
 

@@ -3,6 +3,8 @@
 import { ICheckOut } from "@/interface/payment.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
+import { revalidateTag } from "next/cache";
+
 import { redirect } from "next/navigation";
 
 export const checkOut = async (orderId: string) => {
@@ -40,6 +42,10 @@ export const checkOut = async (orderId: string) => {
         success: false,
         message: result.message || "Failed to create payment",
       };
+    }
+
+    if (result.success) {
+      revalidateTag("self-orders", { expire: 0 });
     }
 
     checkoutUrl = result.data;

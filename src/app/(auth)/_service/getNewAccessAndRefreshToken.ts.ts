@@ -1,8 +1,8 @@
 "use sever";
 import { envVar } from "@/config/envConfig";
-import { TokenNames } from "@/constants/auth.constant";
 
-import { IRefreshTokenResponse } from "@/interface/auth.interface";
+
+import { IRefreshTokenResponse, TokenNames } from "@/interface/auth.interface";
 import { cookies } from "next/headers";
 
 export const getNewAccessAndRefreshToken =

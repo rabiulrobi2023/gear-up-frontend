@@ -13,7 +13,7 @@ import {
 
 export const customerDashboardMenus: IDashboardMenus[] = [
   {
-    label: "All Order",
+    label: "My Orders",
     href: "/dashboard/customer",
     icon: ShoppingBasket,
   },
@@ -31,7 +31,7 @@ export const providerDashboardMenus: IDashboardMenus[] = [
     icon: Store,
   },
   {
-    label: "Orders",
+    label: "User Orders",
     href: "/dashboard/provider/orders",
     icon: PackageOpen,
   },
@@ -44,7 +44,7 @@ export const adminDashboardMenus: IDashboardMenus[] = [
     icon: ChartNoAxesCombined,
   },
   {
-    label: "Users",
+    label: "All Users",
     href: "/dashboard/admin/users",
     icon: Users,
   },

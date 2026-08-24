@@ -1,7 +1,8 @@
 "use server";
 
 
-import { TokenNames } from "@/constants/auth.constant";
+
+import { TokenNames } from "@/interface/auth.interface";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 

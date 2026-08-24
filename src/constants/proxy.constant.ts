@@ -1,6 +1,5 @@
 import { envVar } from "@/config/envConfig";
-
-import { NodeEnv, Role } from "./auth.constant";
+import { NodeEnv, Role } from "@/interface/auth.interface";
 
 export const AUTH_ROUTES = ["/auth/login", "/auth/register"];
 export const PUBLIC_ROUTES = ["/", "/gear"];

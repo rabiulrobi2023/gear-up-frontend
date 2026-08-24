@@ -17,7 +17,9 @@ import {
   DASHBOARD_ROUTES,
   PUBLIC_ROUTES,
 } from "./constants/proxy.constant";
-import { Role, TokenNames } from "./constants/auth.constant";
+import { Role, TokenNames } from "./interface/auth.interface";
+
+
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();

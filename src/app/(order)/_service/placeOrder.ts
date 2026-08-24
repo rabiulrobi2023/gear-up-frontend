@@ -3,6 +3,7 @@
 import { ICreateOrderResponse } from "@/interface/order.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const placeOrder = async (
@@ -39,6 +40,9 @@ export const placeOrder = async (
         message: result.message || "Order not created",
         data: null,
       };
+    }
+    if (result.success) {
+      revalidateTag("self-orders", { expire: 0 });
     }
 
     return result;

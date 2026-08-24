@@ -1,7 +1,16 @@
-const page = () => {
+import { IAllOrderResponse } from "@/interface/order.interface";
+
+import { getSelfOrders } from "../../_service/getSelfOrders";
+import SelfOrderList from "../../_components/SelfOrderList";
+import { getMe } from "@/app/(auth)/_service/getMe";
+
+const page = async () => {
+  const selfOrders: IAllOrderResponse = await getSelfOrders();
+  const user = await getMe();
   return (
     <div>
-      <p>Customer Dashboard</p>
+      <h1 className="text-xl font-bold">Orders</h1>
+      <SelfOrderList orders={selfOrders} role={user?.data?.role} />
     </div>
   );
 };

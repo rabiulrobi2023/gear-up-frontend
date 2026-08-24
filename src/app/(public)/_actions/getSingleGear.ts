@@ -1,7 +1,9 @@
+import {ISingleGearResponse } from "@/interface/gear.interface";
 import { backendBaseUrl } from "@/utils/url";
-import { IGearResponse } from "@/interface/gear.interface";
 
-export const getSingleGear = async (gearId: string): Promise<IGearResponse> => {
+export const getSingleGear = async (
+  gearId: string,
+): Promise<ISingleGearResponse> => {
   const res = await fetch(`${backendBaseUrl}/gear/${gearId}`, {
     method: "GET",
     cache: "force-cache",

@@ -37,7 +37,7 @@ import { CalendarDays, CalendarRangeIcon, ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../../../../components/ui/calendar";
 import { addDays, differenceInCalendarDays, format } from "date-fns";
 import { Spinner } from "../../../../components/ui/spinner";
-import { placeOrder } from "../../_actions/placeOrder";
+import { placeOrder } from "../../_service/placeOrder";
 import { toast } from "sonner";
 import { ICreateOrderPayload } from "@/interface/order.interface";
 
@@ -94,7 +94,7 @@ export function OrderDialog({ gear }: { gear: IGear }) {
 
     if (state.success) {
       toast.success(state.message || "User registered successfully");
-      router.replace(`/dashboard/customer/orders/${state?.data?.id}/pay`);
+      router.replace(`/dashboard/customer`);
     } else {
       toast.error(state.message || "User registration failed");
     }

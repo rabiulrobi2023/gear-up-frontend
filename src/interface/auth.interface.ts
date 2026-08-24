@@ -5,6 +5,27 @@ import z from "zod";
 export type ILoginFormValues = z.infer<typeof loginSchema>;
 export type IRegisterFormValues = z.infer<typeof registerSchema>;
 
+export enum Role {
+  ADMIN = "ADMIN",
+  CUSTOMER = "CUSTOMER",
+  PROVIDER = "PROVIDER",
+}
+
+export enum UserStatus {
+  ACTIVE = "ACTIVE",
+  SUSPEND = "SUSPEND",
+}
+
+export enum NodeEnv {
+  DEVELOPMENT = "DEVELOPMENT",
+  PRODUCTION = "PRODUCTION",
+}
+
+export enum TokenNames {
+  ACCESS_TOKEN = "accessToken",
+  REFRESH_TOKEN = "refreshToken",
+}
+
 export interface ILoginResponse {
   success: boolean;
   message: string;

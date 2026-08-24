@@ -7,7 +7,7 @@ import { IUserResponse } from "@/interface/user.interface";
 const DashboardNavbar = async () => {
   const user = await getMe();
   return (
-    <header className="flex h-16 items-center gap-2  justify-between pr-2 border-b">
+    <header className="flex h-16 items-center gap-2  justify-between pr-2 border-b sticky top-0 z-10 bg-gray-50 ">
       <SidebarTrigger />
       <div className="text-2xl font-bold">
         Gear

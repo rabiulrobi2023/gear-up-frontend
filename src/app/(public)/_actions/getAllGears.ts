@@ -1,12 +1,11 @@
 "use server";
 import { getQueryUrl } from "@/utils/url";
 import { IQueryParams } from "@/interface/common.interface";
-
-import { IGearResponse } from "@/interface/gear.interface";
+import { IAllGearResponse } from "@/interface/gear.interface";
 
 export const getAllGears = async ({
   query,
-}: IQueryParams): Promise<IGearResponse> => {
+}: IQueryParams): Promise<IAllGearResponse> => {
   const queryUrl = await getQueryUrl({ query }, "/gear");
 
   const res = await fetch(queryUrl, {

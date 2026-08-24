@@ -12,12 +12,14 @@ export interface ICreateOrderResponse {
 }
 
 export enum OrderStatus {
-  PENDING = "PENDING",
+  PLACED = "PLACED",
   CONFIRMED = "CONFIRMED",
+  CANCELLED = "CANCELLED",
+  PAID = "PAID",
   PICKED = "PICKED",
   RETURNED = "RETURNED",
-  CANCELLED = "CANCELLED",
 }
+
 export interface IOrder {
   id: string;
   customerId: string;
@@ -30,18 +32,16 @@ export interface IOrder {
   expireAt: string;
   startDate: string;
   returnDate: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 //=======================================
 
-export interface IAllOrdersResponse {
+export interface IAllOrderResponse {
   success: boolean;
   message: string;
   data?: {
     data: IOrderWithItem[];
-    metadata: IMetaData;
+    metadata?: IMetaData;
   };
 }
 
@@ -50,8 +50,6 @@ export interface ISingleOrderResponse {
   message: string;
   data?: IOrderWithItem;
 }
-
-
 
 export interface IOrderWithItem extends IOrder {
   item: IGear;
