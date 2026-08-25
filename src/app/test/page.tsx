@@ -73,7 +73,7 @@ export default function GearFilterNavbar({
               <SelectContent>
                 <SelectItem value="all">All</SelectItem>
 
-                {categories.data.map((category) => (
+                {categories?.data?.map((category) => (
                   <SelectItem
                     key={category.id}
                     value={category.id}

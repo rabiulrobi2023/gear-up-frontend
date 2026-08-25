@@ -12,7 +12,7 @@ const SingleGear = async ({
 
   return (
     <div className="mt-4 max-w-lg mx-auto">
-      <GearDetails gear={gear.data.data as IGear} />
+      <GearDetails gear={gear?.data as IGear} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
-import { Role } from "@/constants/auth.constant";
+
 import { LucideIcon } from "lucide-react";
+import { Role } from "./auth.interface";
 
 export type IUserDashboardMenus = {
   [key in Role]: IDashboardMenus[];

@@ -3,11 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyJwtToken } from "./utils/jwt";
 import { envVar } from "./config/envConfig";
 import { getNewAccessAndRefreshToken } from "./app/(auth)/_service/getNewAccessAndRefreshToken.ts";
-import { string } from "zod";
-import {
-  setAccessTokenIntoCookie,
-  setRefreshTokenIntoCookie,
-} from "./utils/cookie";
+
 import ms, { StringValue } from "ms";
 import { JwtPayload } from "jsonwebtoken";
 import { routeTester } from "./utils/proxy.utils";
@@ -18,8 +14,6 @@ import {
   PUBLIC_ROUTES,
 } from "./constants/proxy.constant";
 import { Role, TokenNames } from "./interface/auth.interface";
-
-
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
@@ -97,11 +91,20 @@ export async function proxy(request: NextRequest) {
   }
 
   //Users role base route
-  // if (userRole && pathname !== DASHBOARD_ROUTES[userRole as keyof typeof Role]) {
-  //   return redirectToDashboard;
-  // }
 
   if (pathname === DASHBOARD_ROUTES[Role.ADMIN] && userRole !== Role.ADMIN) {
+    return redirectToDashboard();
+  }
+  if (
+    pathname === DASHBOARD_ROUTES[Role.CUSTOMER] &&
+    userRole !== Role.CUSTOMER
+  ) {
+    return redirectToDashboard();
+  }
+  if (
+    pathname === DASHBOARD_ROUTES[Role.PROVIDER] &&
+    userRole !== Role.PROVIDER
+  ) {
     return redirectToDashboard();
   }
 

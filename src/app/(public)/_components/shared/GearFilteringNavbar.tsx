@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useTransition } from "react";
+import {  useTransition } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
-// 1. Validation Schema (Defined easily using Zod)
+
 const filterFormSchema = z.object({
   searchTerm: z.string().optional(),
   categoryName: z.string().optional(),
@@ -40,8 +40,7 @@ const filterFormSchema = z.object({
 type FilterFormValues = z.infer<typeof filterFormSchema>;
 
 export function GearFilterNavbar() {
-  const router = useRouter();
-  const pathname = usePathname();
+
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 

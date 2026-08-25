@@ -23,10 +23,8 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/registerAction";
 
-
 const RegistrationForm = () => {
   const router = useRouter();
-
 
   const form = useForm<IRegisterFormValues>({
     resolver: zodResolver(registerSchema),

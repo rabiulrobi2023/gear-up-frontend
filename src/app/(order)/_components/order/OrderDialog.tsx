@@ -33,11 +33,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../../../../components/ui/popover";
-import { CalendarDays, CalendarRangeIcon, ChevronDownIcon } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import { Calendar } from "../../../../components/ui/calendar";
 import { addDays, differenceInCalendarDays, format } from "date-fns";
 import { Spinner } from "../../../../components/ui/spinner";
-import { placeOrder } from "../../_service/placeOrder";
+import { placeOrder } from "../../../(dashboard)/_service/placeOrder";
 import { toast } from "sonner";
 import { ICreateOrderPayload } from "@/interface/order.interface";
 

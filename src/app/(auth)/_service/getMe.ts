@@ -22,7 +22,7 @@ export const getMe = async (): Promise<IUserResponse | null> => {
     const result = await res.json();
     return result;
   } catch (error) {
-    console.log("Get profile error", error);
+
     return {
       success: false,
       message: "Failed to get profile",

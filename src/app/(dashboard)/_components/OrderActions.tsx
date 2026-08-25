@@ -1,32 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Role } from "@/interface/auth.interface";
 import { OrderStatus } from "@/interface/order.interface";
-import { IRole } from "@/interface/user.interface";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import React from "react";
 
 interface IOrderActionsProps {
   status: OrderStatus;
   role: Role;
-  orderId:string;
+  orderId: string;
+  reviewDialog?: React.ReactNode;
   onConfirm?: () => void;
-  onPay?: () => void;
   onPickup?: () => void;
   onReturn?: () => void;
-  onReview?: () => void;
 }
 
 const OrderActions = ({
   status,
   role,
   orderId,
+  reviewDialog,
   onConfirm,
-  onPay,
   onPickup,
   onReturn,
-  onReview,
 }: IOrderActionsProps) => {
-
   if (status === OrderStatus.PLACED && role === Role.PROVIDER) {
     return (
       <Button size="sm" onClick={onConfirm}>
@@ -38,7 +35,7 @@ const OrderActions = ({
   if (status === OrderStatus.CONFIRMED && role === Role.CUSTOMER) {
     return (
       <Button size="sm">
-       <Link href={`/dashboard/customer/orders/${orderId}/pay`}>Pay Now</Link>
+        <Link href={`/dashboard/customer/orders/${orderId}/pay`}>Pay Now</Link>
       </Button>
     );
   }
@@ -58,11 +55,7 @@ const OrderActions = ({
   }
 
   if (status === OrderStatus.RETURNED && role === Role.CUSTOMER) {
-    return (
-      <Button size="sm" onClick={onReview}>
-        Leave Review
-      </Button>
-    );
+    return reviewDialog;
   }
   return null;
 };

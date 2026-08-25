@@ -19,7 +19,7 @@ import { logo } from "@/constants/image.constant";
 import Image from "next/image";
 
 export function DashboardSidebar({ user }: { user: IUser }) {
-  const userDashboardMenus = getUserMenus(user.role);
+  const userDashboardMenus = getUserMenus(user?.role);
   const pathName = usePathname();
   return (
     <Sidebar>
@@ -31,7 +31,7 @@ export function DashboardSidebar({ user }: { user: IUser }) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {userDashboardMenus.length ? (
+            {userDashboardMenus?.length ? (
               <SidebarMenuSub className="border-0">
                 {userDashboardMenus.map((menu) => (
                   <SidebarMenuSubItem key={menu.label}>

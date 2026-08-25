@@ -8,8 +8,10 @@ import { format } from "date-fns";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import OrderStatusBadge from "./OrderStatusBadge";
-import OrderActions from "./OrderActions";
+
 import { Role } from "@/interface/auth.interface";
+import OrderActions from "./OrderActions";
+import { ReviewDialog } from "./ReviewDialog";
 
 const SelfOrderCard = ({
   order,
@@ -40,7 +42,7 @@ const SelfOrderCard = ({
     item,
   } = order;
 
-  const { name: gearName, brand, image, provider, category } = item;
+  const { id: itemId, name: gearName, brand, image, provider, category } = item;
 
   return (
     <Card className="overflow-hidden p-0">
@@ -122,11 +124,12 @@ const SelfOrderCard = ({
                 status={status}
                 role={role}
                 orderId={orderId}
+                reviewDialog={
+                  <ReviewDialog itemId={itemId} orderId={orderId} />
+                }
                 onConfirm={onConfirm}
-                onPay={onPay}
                 onPickup={onPickup}
                 onReturn={onReturn}
-                onReview={onReview}
               />
             </div>
           </div>

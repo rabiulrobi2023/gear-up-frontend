@@ -1,5 +1,4 @@
-import { Role, UserStatus } from "@/constants/auth.constant";
-
+import { Role, UserStatus } from "./auth.interface";
 
 export type IRole = keyof typeof Role
 
