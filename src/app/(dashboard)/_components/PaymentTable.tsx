@@ -1,7 +1,7 @@
 "use client";
 import TableStructure, {
   ITableColumn,
-} from "@/components/shared/TableStructure";
+} from "@/components/shared/table/TableStructure";
 import { IPayment } from "@/interface/payment.interface";
 
 const columns: ITableColumn[] = [
@@ -13,37 +13,37 @@ const columns: ITableColumn[] = [
   {
     header: "Method",
     key: "method",
-    className:"text-center"
+    className: "text-center",
   },
 
   {
     header: "Daily Rate",
     key: "dailyRate",
-    className: "text-right"
+    className: "text-right",
   },
 
   {
     header: "Quantity",
     key: "quantity",
-    className: "text-right"
+    className: "text-right",
   },
 
   {
     header: "Total Days",
     key: "totalDays",
-    className:"text-right"
+    className: "text-right",
   },
 
   {
     header: "Total Amount",
     key: "amount",
-    className:"text-right"
+    className: "text-right",
   },
 
   {
     header: "Status",
     key: "status",
-    className: "text-right"
+    className: "text-right",
   },
 ];
 const PaymentTable = ({ paymentData }: { paymentData: IPayment[] }) => {

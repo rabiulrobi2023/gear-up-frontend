@@ -1,6 +1,6 @@
 "use client";
 
-import RequiredLabel from "@/components/shared/RequiredLabel";
+
 import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -22,6 +22,7 @@ import { useActionState, useEffect, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/registerAction";
+import RequiredLabel from "@/components/shared/table/RequiredLabel";
 
 const RegistrationForm = () => {
   const router = useRouter();

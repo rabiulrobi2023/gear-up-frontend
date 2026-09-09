@@ -23,12 +23,13 @@ import { IReviewFormValue } from "@/interface/review.interface";
 import { reviewSchema } from "@/validation/reviewSchema";
 
 import { toast } from "sonner";
-import RequiredLabel from "@/components/shared/RequiredLabel";
+
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Spinner } from "@/components/ui/spinner";
 import { leaveReview } from "../_actions/leaveReview";
+import RequiredLabel from "@/components/shared/table/RequiredLabel";
 
 export function ReviewDialog({
   itemId,

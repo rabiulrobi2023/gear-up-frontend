@@ -1,6 +1,6 @@
 import { IGear } from "@/interface/gear.interface";
 import { getSingleGear } from "../../_actions/getSingleGear";
-import GearDetails from "../../_components/gear/GearDetails";
+import GearDetails from "../../../../components/shared/gear/GearDetails";
 
 const SingleGear = async ({
   params,

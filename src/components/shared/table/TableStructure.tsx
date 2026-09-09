@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from "../../ui/table";
 
 export interface ITableColumn {
   key: string;
@@ -29,9 +29,14 @@ const TableStructure = <T,>({
     <div>
       <Table>
         <TableHeader>
-          <TableRow  className="bg-primary hover:bg-primary">
+          <TableRow className="bg-primary hover:bg-primary">
             {columns.map((column) => (
-              <TableHead key={column.key} className={cn(column.className, "text-white")}>{column.header}</TableHead>
+              <TableHead
+                key={column.key}
+                className={cn(column.className, "text-white")}
+              >
+                {column.header}
+              </TableHead>
             ))}
           </TableRow>
         </TableHeader>

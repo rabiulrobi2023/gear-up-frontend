@@ -1,5 +1,5 @@
 import { getAllGears } from "../_actions/getAllGears";
-import GearList from "../_components/gear/GearList";
+import GearList from "../../../components/shared/gear/GearList";
 
 import { getAllCategories } from "../_actions/getAllCategories";
 import { GearFilterNavbar } from "../_components/shared/GearFilteringNavbar";

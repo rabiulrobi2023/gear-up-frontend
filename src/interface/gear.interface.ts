@@ -4,15 +4,15 @@ export interface IAllGearResponse {
   success: boolean;
   message: string;
   data: {
-    data: IGear[];
+    data: IGear[] ;
     metadata?: IMetaData;
-  };
+  } ;
 }
 
 export interface ISingleGearResponse {
   success: boolean;
   message: string;
-  data?: IGear
+  data?: IGear;
 }
 
 export interface IGear {

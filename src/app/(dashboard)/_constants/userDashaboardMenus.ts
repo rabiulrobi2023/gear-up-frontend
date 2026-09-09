@@ -26,8 +26,8 @@ export const customerDashboardMenus: IDashboardMenus[] = [
 
 export const providerDashboardMenus: IDashboardMenus[] = [
   {
-    label: "Gears",
-    href: "/dashboard/provider",
+    label: "My Gears",
+    href: "/dashboard/provider/my-gears",
     icon: Store,
   },
   {
