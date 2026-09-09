@@ -1,9 +1,8 @@
-import { IAllGearResponse } from "@/interface/gear.interface";
+import { IPaymentResponse } from "@/interface/payment.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
-import { revalidateTag } from "next/cache";
 
-export const getSelfGears = async (): Promise<IAllGearResponse> => {
+export const getAllPayments = async (): Promise<IPaymentResponse> => {
   try {
     const headers = await getAuthenticatedHeaders();
 
@@ -11,37 +10,35 @@ export const getSelfGears = async (): Promise<IAllGearResponse> => {
       return {
         success: false,
         message: "Authentication required",
-        data: { data: [] },
+        data: [],
       };
     }
 
-    const res = await fetch(`${backendBaseUrl}/provider/my-gears`, {
+    const res = await fetch(`${backendBaseUrl}/payments`, {
       method: "GET",
       headers,
 
       next: {
         revalidate: 24 * 60 * 60,
-        tags: ["self-gears"],
+        tags: ["payments"],
       },
-      
     });
 
-    const result = await res.json();
+    const result: IPaymentResponse = await res.json();
 
     if (!res.ok || !result.success) {
       return {
         success: false,
         message: result.message || "Failed to fetch order",
-        data: { data: [] },
+        data: [],
       };
     }
-
     return result;
   } catch (error: unknown) {
     return {
       success: false,
       message: error instanceof Error ? error?.message : "Something went wrong",
-      data: { data: [] },
+      data: [],
     };
   }
 };

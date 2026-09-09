@@ -1,12 +1,14 @@
+import z from "zod";
 import { IMetaData } from "./common.interface";
+import { addGearSchema } from "@/validation/addGearSchema";
 
 export interface IAllGearResponse {
   success: boolean;
   message: string;
   data: {
-    data: IGear[] ;
+    data: IGear[];
     metadata?: IMetaData;
-  } ;
+  };
 }
 
 export interface ISingleGearResponse {
@@ -41,4 +43,25 @@ interface Provider {
 interface Category {
   id: string;
   name: string;
+}
+
+export type IAddGearFormData = z.infer<typeof addGearSchema>;
+
+export interface IAddGear {
+  id: string;
+  name: string;
+  brand: string;
+  description: string;
+  image: string;
+  providerId: string;
+  categoryId: string;
+  dailyRate: string;
+  stock: number;
+  isAvailable: boolean;
+}
+
+export interface IAddGearResponse {
+  success: boolean;
+  message: string;
+  data: IAddGear | null;
 }

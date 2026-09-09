@@ -6,6 +6,7 @@ import {
   ChartNoAxesCombined,
   CircleDollarSign,
   PackageOpen,
+  PackagePlus,
   ShoppingBasket,
   Store,
   Users,
@@ -29,6 +30,11 @@ export const providerDashboardMenus: IDashboardMenus[] = [
     label: "My Gears",
     href: "/dashboard/provider/my-gears",
     icon: Store,
+  },
+  {
+    label: "Add Gear",
+    href: "/dashboard/provider/add-gear",
+    icon: PackagePlus,
   },
   {
     label: "User Orders",

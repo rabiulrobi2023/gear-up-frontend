@@ -14,7 +14,7 @@ interface GearCardProps {
 export function GearCard({ gear }: GearCardProps) {
   return (
     <Link href={`/gear/${gear.id}`}>
-      <Card className=" mx-auto mt-2 w-full max-w-sm cursor-pointer overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex  min-h-max p-2">
+      <Card className=" mx-auto mt-2 w-full max-w-sm cursor-pointer overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex">
         <Image
           unoptimized
           src={
@@ -35,7 +35,7 @@ export function GearCard({ gear }: GearCardProps) {
           </p>
         </CardHeader>
 
-        <CardContent className="space-y-1 mt-auto">
+        <CardContent className="mt-auto py-0 space-y-0">
           <p>
             <span className="font-medium">Brand:</span>
             {gear.brand}
