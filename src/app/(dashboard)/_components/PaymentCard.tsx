@@ -10,7 +10,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const PaymentPage = ({ order }: { order: IOrderWithItem }) => {
+const PaymentCard = ({ order }: { order: IOrderWithItem }) => {
     const router = useRouter()
 
   const [isPending, startTransition] = useTransition();
@@ -83,4 +83,4 @@ const PaymentPage = ({ order }: { order: IOrderWithItem }) => {
   );
 };
 
-export default PaymentPage;
+export default PaymentCard;

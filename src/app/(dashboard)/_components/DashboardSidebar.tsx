@@ -38,7 +38,7 @@ export function DashboardSidebar({ user }: { user: IUser }) {
                     <SidebarMenuSubButton
                       asChild
                       isActive={pathName === menu.href}
-                      className="data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:[&>svg]:text-white rounded-xs hover:bg-primary hover:text-white hover:[&>svg]:text-white"
+                      className="data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:[&>svg]:text-white rounded-xs hover:bg-light hover:text-white hover:[&>svg]:text-white"
                     >
                       <Link href={menu.href}>
                         {" "}

@@ -12,7 +12,7 @@ export const getAuthenticatedHeaders =
     }
 
     return {
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
       Cookie: `${TokenNames.ACCESS_TOKEN}=${accessToken}`,
     };
   };

@@ -62,7 +62,7 @@ export const leaveReview = async (
       };
     }
 
-    revalidateTag("self-orders", { expire: 0 });
+    revalidateTag("self-orders", { expire:0 });
 
     return result;
   } catch (error) {

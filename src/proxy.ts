@@ -34,7 +34,10 @@ export async function proxy(request: NextRequest) {
       envVar.JWT_REFRESH_TOKEN_SECRET as string,
     );
 
-    if (decodedRefreshToken.success) {
+    if (!decodedRefreshToken?.success) {
+      response.cookies.delete(TokenNames.ACCESS_TOKEN);
+      response.cookies.delete(TokenNames.REFRESH_TOKEN);
+    } else {
       const newTokens = await getNewAccessAndRefreshToken();
 
       accessToken = newTokens.data?.accessToken as string;
@@ -61,11 +64,6 @@ export async function proxy(request: NextRequest) {
         envVar.JWT_ACCESS_TOKEN_SECRET as string,
       );
     }
-  }
-
-  if (!decodedAccessToken?.success) {
-    response.cookies.delete(TokenNames.ACCESS_TOKEN);
-    response.cookies.delete(TokenNames.REFRESH_TOKEN);
   }
 
   /////////////Authorization part//////////////////

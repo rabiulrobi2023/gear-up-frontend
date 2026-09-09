@@ -18,6 +18,7 @@ export enum OrderStatus {
   PAID = "PAID",
   PICKED = "PICKED",
   RETURNED = "RETURNED",
+  COMPLETED = "COMPLETED"
 }
 
 export interface IOrder {

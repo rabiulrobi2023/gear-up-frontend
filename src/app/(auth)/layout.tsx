@@ -5,6 +5,7 @@ import { PublicNavbar } from "../(public)/_components/shared/PublicNavbar";
 
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  
   return (
     <div>
       <PublicNavbar />
