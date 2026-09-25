@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { IGear } from "@/interface/gear.interface";
 import Image from "next/image";
 
-
 import { Controller, useForm } from "react-hook-form";
 import React, {
   useActionState,
@@ -40,7 +39,7 @@ import { Spinner } from "../../../../components/ui/spinner";
 import { placeOrder } from "../../../(dashboard)/_service/placeOrder";
 import { toast } from "sonner";
 import { ICreateOrderPayload } from "@/interface/order.interface";
-import RequiredLabel from "@/components/shared/table/RequiredLabel";
+import RequiredLabel from "@/components/shared/RequiredLabel";
 
 export function OrderDialog({ gear }: { gear: IGear }) {
   const router = useRouter();

@@ -1,8 +1,9 @@
 "use client";
-import TableStructure, {
-  ITableColumn,
-} from "@/components/shared/table/TableStructure";
+
+
+import DataTable from "@/components/shared/table/DataTable";
 import { IPayment } from "@/interface/payment.interface";
+import { ITableColumn } from "@/interface/table.interface";
 
 const columns: ITableColumn[] = [
   {
@@ -58,10 +59,10 @@ const PaymentTable = ({ paymentData }: { paymentData: IPayment[] }) => {
   }));
 
   return (
-    <TableStructure
+    <DataTable 
       columns={columns}
       data={tableData}
-      emptyMessage="There is no any payment"
+      emptyMessage="There is no any payment" 
     />
   );
 };

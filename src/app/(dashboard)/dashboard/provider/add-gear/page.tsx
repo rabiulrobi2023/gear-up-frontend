@@ -1,4 +1,4 @@
-import AddAndUpdateGearForm from "@/app/(dashboard)/_components/AddAndUpdateGearForm";
+import AddAndUpdateGearForm from "@/app/(dashboard)/_components/provider/AddAndUpdateGearForm";
 import { getAllCategories } from "@/app/(public)/_actions/getAllCategories";
 
 import {

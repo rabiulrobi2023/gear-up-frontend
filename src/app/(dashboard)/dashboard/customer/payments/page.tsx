@@ -1,4 +1,4 @@
-import PaymentTable from "@/app/(dashboard)/_components/PaymentTable";
+import PaymentTable from "@/app/(dashboard)/_components/customer/PaymentTable";
 import { getAllPayments } from "@/app/(dashboard)/_service/getAllPayments";
 
 const PaymentPage = async () => {

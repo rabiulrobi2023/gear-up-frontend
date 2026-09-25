@@ -10,10 +10,10 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import RequiredLabel from "@/components/shared/table/RequiredLabel";
+import RequiredLabel from "@/components/shared/RequiredLabel";
 import { IAddGear, IAddGearFormData } from "@/interface/gear.interface";
 import { addGearSchema } from "@/validation/addGearSchema";
-import { addGearAction } from "../_actions/addGearAction";
+import { addGearAction } from "../../_actions/addGearAction";
 import { ICategory } from "@/interface/category.interface";
 import {
   Select,

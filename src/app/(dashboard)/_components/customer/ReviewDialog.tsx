@@ -28,8 +28,8 @@ import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Spinner } from "@/components/ui/spinner";
-import { leaveReview } from "../_actions/leaveReview";
-import RequiredLabel from "@/components/shared/table/RequiredLabel";
+import { leaveReview } from "../../_actions/leaveReview";
+import RequiredLabel from "@/components/shared/RequiredLabel";
 
 export function ReviewDialog({
   itemId,

@@ -7,10 +7,10 @@ import { IOrderWithItem } from "@/interface/order.interface";
 import { format } from "date-fns";
 import { Eye } from "lucide-react";
 import Image from "next/image";
-import OrderStatusBadge from "./OrderStatusBadge";
+import OrderStatusBadge from "../shared/OrderStatusBadge";
 
 import { Role } from "@/interface/auth.interface";
-import OrderActions from "./OrderActions";
+import OrderActions from "../shared/OrderActions";
 import { ReviewDialog } from "./ReviewDialog";
 
 const SelfOrderCard = ({

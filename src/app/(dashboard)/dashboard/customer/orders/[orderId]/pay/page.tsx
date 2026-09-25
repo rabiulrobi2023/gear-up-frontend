@@ -1,4 +1,4 @@
-import PaymentPage from "@/app/(dashboard)/_components/PaymentCard";
+import PaymentPage from "@/app/(dashboard)/_components/customer/PaymentCard";
 import { getSingleOrder } from "@/app/(dashboard)/_service/getSingleOrder";
 
 import {

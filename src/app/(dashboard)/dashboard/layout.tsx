@@ -4,8 +4,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import React from "react";
-import { DashboardSidebar } from "../_components/DashboardSidebar";
-import DashboardNavbar from "../_components/DashboardNavbar";
+import { DashboardSidebar } from "../_components/shared/DashboardSidebar";
+import DashboardNavbar from "../_components/shared/DashboardNavbar";
 import { cn } from "@/lib/utils";
 import { getMe } from "@/app/(auth)/_service/getMe";
 import { IUser } from "@/interface/user.interface";

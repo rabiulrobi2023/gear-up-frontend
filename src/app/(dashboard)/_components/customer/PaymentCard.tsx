@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { IOrderWithItem } from "@/interface/order.interface";
 import { format } from "date-fns";
-import { checkOut } from "../_actions/checkOut";
+import { checkOut } from "../../_actions/checkOut";
 import { useTransition } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const PaymentCard = ({ order }: { order: IOrderWithItem }) => {
-    const router = useRouter()
+  const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
   const handleCheckOut = () => {
@@ -19,7 +19,7 @@ const PaymentCard = ({ order }: { order: IOrderWithItem }) => {
       const result = await checkOut(order.id);
       if (!result.success) {
         toast.error(result.message || "Something went wrong");
-        router.push("/")
+        router.push("/");
       }
     });
   };

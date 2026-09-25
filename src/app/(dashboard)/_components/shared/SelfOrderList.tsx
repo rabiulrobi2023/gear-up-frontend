@@ -2,7 +2,7 @@
 
 import { IAllOrderResponse } from "@/interface/order.interface";
 
-import SelfOrderCard from "./SelfOrderCard";
+import SelfOrderCard from "../customer/SelfOrderCard";
 import { Role } from "@/interface/auth.interface";
 import { redirect } from "next/navigation";
 

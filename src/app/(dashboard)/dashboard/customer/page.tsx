@@ -1,6 +1,6 @@
 import { IAllOrderResponse } from "@/interface/order.interface";
 import { getSelfOrders } from "../../_service/getSelfOrders";
-import SelfOrderList from "../../_components/SelfOrderList";
+import SelfOrderList from "../../_components/shared/SelfOrderList";
 import { getMe } from "@/app/(auth)/_service/getMe";
 import { Role } from "@/interface/auth.interface";
 
