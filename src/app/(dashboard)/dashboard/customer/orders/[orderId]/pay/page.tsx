@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { IOrderWithItem } from "@/interface/order.interface";
+import { IOrder } from "@/interface/order.interface";
+
 
 const PaymentInitiatePage = async ({
   params,
@@ -19,13 +20,13 @@ const PaymentInitiatePage = async ({
   const order = await getSingleOrder(orderId);
 
   return (
-    <Card className="w-[400px] flex mx-auto border-0 border-none border-transparent shadow-none rounded-sm ">
+    <Card className="w-[400px] flex mx-auto ring-0 shadow-none ">
       <CardHeader className="text-center">
-        <CardTitle className="text-lg font-bold">Payment</CardTitle>
+        <CardTitle className="text-xl font-bold">Payment</CardTitle>
         <CardDescription className="pb-6">
           Make payment to confirm your rents
         </CardDescription>
-        <PaymentPage order={order.data as IOrderWithItem} />
+        <PaymentPage order={order.data as IOrder} />
       </CardHeader>
     </Card>
   );

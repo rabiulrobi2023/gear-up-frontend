@@ -8,7 +8,7 @@ import RegistrationForm from "../../_components/RegistrationForm";
 
 const RegisterPage = () => {
   return (
-    <Card className="w-full min-w-sm md:min-w-md md:max-w-lg rounded-md">
+    <Card className="w-full min-w-sm md:min-w-md md:max-w-lg rounded-md ring-0 shadow-xl ">
       <CardHeader>
         <CardTitle className="text-center font-bold text-xl">
           Register your account

@@ -11,11 +11,7 @@ import { useGetMyAllOrders } from "@/hooks/share.hook";
 const SelfOrderList = ({ role }: { role: Role }) => {
   const { data: orders, isLoading: orderFetchLoading } = useGetMyAllOrders();
 
-  const {
-    mutate: confirm,
-    isPending: isConfirmPending,
-    variables,
-  } = useConfirmOrder();
+  const { mutate: confirm, isPending, variables } = useConfirmOrder();
 
   if (orderFetchLoading) {
     return <FullDisplayLoader />;
@@ -25,19 +21,26 @@ const SelfOrderList = ({ role }: { role: Role }) => {
     return <p>There is no any order</p>;
   }
 
-  const handleConfirmOrder = (id: string) => {
-    confirm(
-      { id, body: { status: OrderStatus.CONFIRMED } },
-      {
-        onSuccess: (res) => {
-          toast.success(res.message || "Order confirmed successfully");
+  const handleOrderStatusChange = (status: OrderStatus) => {
+    return (id: string) => {
+      confirm(
+        { id, body: { status } },
+        {
+          onSuccess: (res) => {
+            toast.success(res.message || "Order status changed successfully");
+          },
+          onError: (error) => {
+            toast.error(error.message || "Failed to change order status");
+          },
         },
-        onError: (error) => {
-          toast.error(error.message || "Failed to confirm order");
-        },
-      },
-    );
+      );
+    };
   };
+
+  const handleConfirmOrder = handleOrderStatusChange(OrderStatus.CONFIRMED);
+  const handlePickupOrder = handleOrderStatusChange(OrderStatus.PICKED);
+  const handleReturnOrder = handleOrderStatusChange(OrderStatus.RETURNED)
+
 
   return (
     <div className="space-y-5 mt-5">
@@ -47,7 +50,7 @@ const SelfOrderList = ({ role }: { role: Role }) => {
           order={order}
           role={role}
           onConfirm={handleConfirmOrder}
-          isConfirmPending={isConfirmPending && variables?.id === order.id}
+          isPending={isPending && variables?.id === order.id} onPickup={handlePickupOrder} onReturn={handleReturnOrder}
         />
       ))}
     </div>

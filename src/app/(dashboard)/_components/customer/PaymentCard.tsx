@@ -2,18 +2,20 @@
 
 import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { IOrderWithItem } from "@/interface/order.interface";
+
 import { format } from "date-fns";
 import { checkOut } from "../../_actions/checkOut";
 import { useTransition } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { IOrder } from "@/interface/order.interface";
 
-const PaymentCard = ({ order }: { order: IOrderWithItem }) => {
+const PaymentCard = ({ order }: { order: IOrder}) => {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
+
   const handleCheckOut = () => {
     startTransition(async () => {
       const result = await checkOut(order.id);
@@ -27,8 +29,8 @@ const PaymentCard = ({ order }: { order: IOrderWithItem }) => {
   return (
     <>
       <CardContent className="p-0">
-        <div>
-          <dl className="grid grid-cols-[auto_auto_1fr]  text-right space-y-5">
+        <div >
+          <dl className="grid grid-cols-[auto_auto_1fr]  text-right space-y-8">
             <dt className="text-left">Product Name</dt>
             <span>:</span>
             <dd className="font-bold">{order.item?.name}</dd>

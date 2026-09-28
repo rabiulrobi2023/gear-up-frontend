@@ -8,8 +8,9 @@ import { IOrder } from "@/interface/order.interface";
 import { IDataTableColumn } from "@/interface/table.interface";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
-const RecentOrderTable= () => {
+const RecentOrderTable = () => {
   const { data, isLoading } = useGetMyAllOrders();
 
   const orders: IOrder[] = data?.data?.data || [];
@@ -79,12 +80,14 @@ const RecentOrderTable= () => {
         emptyMessage="There is no any pending orders"
       />
       {orders?.length > 1 ? (
-        <Button
-          className="text-primary hover:bg-transparent hover:underline hover:cursor-pointer hover:text-primary p-0"
-          variant="ghost"
-        >
-          See all..
-        </Button>
+        <Link href="/dashboard/provider/orders">
+          <Button
+            className="text-primary hover:bg-transparent hover:underline hover:cursor-pointer hover:text-primary p-0"
+            variant="ghost"
+          >
+            See all..
+          </Button>
+        </Link>
       ) : (
         ""
       )}

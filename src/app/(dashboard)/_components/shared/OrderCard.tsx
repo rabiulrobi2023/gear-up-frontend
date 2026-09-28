@@ -14,20 +14,17 @@ const OrderCard = ({
   order,
   role,
   onConfirm,
-  isConfirmPending,
-  onPay,
+  isPending,
+
   onPickup,
   onReturn,
-  onReview,
 }: {
   order: IOrder;
   role: Role;
   onConfirm?: (id: string) => void;
-  isConfirmPending?: boolean;
-  onPay?: () => void;
-  onPickup?: () => void;
-  onReturn?: () => void;
-  onReview?: () => void;
+  isPending?: boolean;
+  onPickup?: (id:string) => void;
+  onReturn?: (id:string) => void;
 }) => {
   const {
     id: orderId,
@@ -47,10 +44,8 @@ const OrderCard = ({
   const { id: itemId, name: gearName, brand, image, provider, category } = item;
   const { name: providerName } = provider;
 
-  console.log(role)
-
   return (
-    <Card className="overflow-hidden p-0  rounded-md ring-0 border-b shadow-none">
+    <Card className="overflow-hidden p-0 rounded-none ring-0 border-b shadow-none">
       <CardContent className="p-3">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           {/* Image */}
@@ -137,9 +132,9 @@ const OrderCard = ({
                   <ReviewDialog itemId={itemId} orderId={orderId} />
                 }
                 onConfirm={onConfirm}
-                isConfirmPending={isConfirmPending}
                 onPickup={onPickup}
                 onReturn={onReturn}
+                isPending={isPending}
               />
             </div>
           </div>

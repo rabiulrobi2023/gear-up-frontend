@@ -1,5 +1,6 @@
 "use client";
 
+import ActionButton from "@/components/shared/ActionButton";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Role } from "@/interface/auth.interface";
@@ -14,9 +15,9 @@ interface IOrderActionsProps {
   orderId: string;
   reviewDialog?: React.ReactNode;
   onConfirm?: (id: string) => void;
-  isConfirmPending?: boolean;
-  onPickup?: () => void;
-  onReturn?: () => void;
+  isPending?: boolean;
+  onPickup?: (id: string) => void;
+  onReturn?: (id: string) => void;
 }
 
 const OrderActions = ({
@@ -25,28 +26,19 @@ const OrderActions = ({
   orderId,
   reviewDialog,
   onConfirm,
-  isConfirmPending,
+  isPending,
   onPickup,
   onReturn,
 }: IOrderActionsProps) => {
   if (status === OrderStatus?.PLACED && role === Role.PROVIDER) {
     return (
-      <Button
-        disabled={isConfirmPending}
-        type="button"
-        size="sm"
-        onClick={() => {
-          onConfirm?.(orderId);
-        }}
+      <ActionButton
+        loading={isPending}
+        loadingText="Confirming.."
+        onClick={() => onConfirm?.(orderId)}
       >
-        {isConfirmPending ? (
-          <span className="flex gap-2">
-            <Spinner/> Confirming..
-          </span>
-        ) : (
-          "Confirm"
-        )}
-      </Button>
+        Confirm
+      </ActionButton>
     );
   }
 
@@ -59,16 +51,24 @@ const OrderActions = ({
   }
   if (status === OrderStatus.PAID && role === Role.PROVIDER) {
     return (
-      <Button size="sm" onClick={onPickup}>
+      <ActionButton
+        loading={isPending}
+        loadingText="Picking..."
+        onClick={() => onPickup?.(orderId)}
+      >
         Mark Picked Up
-      </Button>
+      </ActionButton>
     );
   }
   if (status === OrderStatus.PICKED && role === Role.PROVIDER) {
     return (
-      <Button size="sm" onClick={onReturn}>
+      <ActionButton
+        loading={isPending}
+        loadingText="Returning..."
+        onClick={() => onReturn?.(orderId)}
+      >
         Mark as Return
-      </Button>
+      </ActionButton>
     );
   }
 
