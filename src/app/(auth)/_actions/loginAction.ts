@@ -50,8 +50,7 @@ export const loginAction = async (
 
     await setRefreshTokenIntoCookie(refreshToken);
   } catch (error) {
-    console.error("Login error:", error);
-
+  
     return {
       success: false,
       message: "Something went wrong. Please try again",

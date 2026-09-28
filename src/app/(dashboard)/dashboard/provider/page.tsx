@@ -1,18 +1,16 @@
-import { getSelfGears } from "@/app/(dashboard)/_service/getSelfGears";
-import GearList from "@/components/shared/gear/GearList";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { ProviderGearStatistics } from "../../_components/provider/ProviderGearStatistics";
+import RecentOrderTable from "../../_components/provider/RecentOrderTable";
 
 const MyGearPage = async () => {
-  const gears = await getSelfGears();
-  console.log(gears);
   return (
-    <div className=" px-2 md:px-0">
-      <div  className="flex justify-between mb-5">
-        <h1 className="pt-2 text-xl font-bold">My Gears</h1>
-       <Link href={"/dashboard/provider/add-gear"}> <Button>Add Gear</Button></Link>
+    <div className="flex flex-col gap-3">
+      <p className="text-xl font-bold">Gear and Order Statistics</p>
+      <ProviderGearStatistics />
+
+      <div className="mt-4">
+        <p className="text-xl font-bold">Recent Orders</p>
+        <RecentOrderTable />
       </div>
-      <GearList gears={gears} />
     </div>
   );
 };

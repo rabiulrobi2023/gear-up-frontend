@@ -1,9 +1,8 @@
-import { IAllGearResponse } from "@/interface/gear.interface";
+import { IOrderResponse } from "@/interface/order.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
-import { revalidateTag } from "next/cache";
 
-export const getSelfGears = async (): Promise<IAllGearResponse> => {
+export const getCustomerOrders = async (): Promise<IOrderResponse> => {
   try {
     const headers = await getAuthenticatedHeaders();
 
@@ -11,17 +10,16 @@ export const getSelfGears = async (): Promise<IAllGearResponse> => {
       return {
         success: false,
         message: "Authentication required",
-        data: { data: [] },
       };
     }
 
-    const res = await fetch(`${backendBaseUrl}/provider/my-gears`, {
+    const res = await fetch(`${backendBaseUrl}/rentals`, {
       method: "GET",
       headers,
 
       next: {
         revalidate: 24 * 60 * 60,
-        tags: ["self-gears"],
+        tags: ["self-orders"],
       },
     });
 
@@ -31,16 +29,16 @@ export const getSelfGears = async (): Promise<IAllGearResponse> => {
       return {
         success: false,
         message: result.message || "Failed to fetch order",
-        data: { data: [] },
       };
     }
 
     return result;
-  } catch (error: unknown) {
+  } catch (error) {
+    console.error("Get single order error:", error);
+
     return {
       success: false,
-      message: error instanceof Error ? error?.message : "Something went wrong",
-      data: { data: [] },
+      message: "Something went wrong",
     };
   }
 };

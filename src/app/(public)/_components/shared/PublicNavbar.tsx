@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { IApiResponse } from "@/interface";
+import { IApiResponse } from "@/interface/apiResponse";
 
 import UserDropdownMenu from "../../../(auth)/_components/UserDropdownMenu";
 

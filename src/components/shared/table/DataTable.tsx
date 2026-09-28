@@ -1,5 +1,3 @@
-"use client";
-import { cn } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -7,66 +5,105 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
+} from "@/components/ui/table";
+import { IDataTableProps } from "@/interface/table.interface";
+import { cn } from "@/lib/utils";
 
-import { ITableProps } from "@/interface/table.interface";
-
-const DataTable = <T,>({
+export function DataTable<T>({
   data,
+
   columns,
-  emptyMessage = "No data found",
+  rowKey,
   topAction,
   rowAction,
-}: ITableProps<T>) => {
+  isLoading = false,
+  emptyMessage = "No data found.",
+  tableBodyClassName,
+  headerClassName,
+  rowClassName,
+}: IDataTableProps<T>) {
+  const columnCount = columns.length + (rowAction ? 1 : 0);
+
   return (
-    <div>
-      <div>
-        {topAction && <div className="flex justify-end">{topAction}</div>}
-      </div>
-      <div>
+    <div className="space-y-4">
+      {topAction && <div className="flex justify-end">{topAction}</div>}
+
+      <div
+        className={cn(
+          "rounded-md border-1 overflow-hidden",
+          tableBodyClassName,
+        )}
+      >
         <Table>
-          <TableHeader>
-            <TableRow className="bg-primary hover:bg-primary">
+          <TableHeader className="bg-none hover:bg-none">
+            <TableRow
+              className={cn("hover:bg-gray-100 bg-gray-100", headerClassName)}
+            >
               {columns.map((column) => (
                 <TableHead
-                  key={column.key}
-                  className={cn(column.className, "text-white")}
+                  key={column.key as string}
+                  className={column.className}
                 >
                   {column.header}
                 </TableHead>
               ))}
 
-              {rowAction && <TableHead>Action</TableHead>}
+              {rowAction && <TableHead>Actions</TableHead>}
             </TableRow>
           </TableHeader>
-          <TableBody>
-            {data.length > 0 ? (
-              data.map((row, rowIndex) => (
-                <TableRow key={rowIndex} className="hover:bg-light">
-                  {columns?.map((column) => (
-                    <TableCell key={column.key} className={column.className}>
-                      {String(row[column?.key as keyof T]) ?? "-"}
-                    </TableCell>
-                  ))}
 
-                  {rowAction && <TableCell>{rowAction}</TableCell>}
-                </TableRow>
-              ))
-            ) : (
+          <TableBody className="">
+            {isLoading ? (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columnCount} className="h-24 text-center">
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : data.length === 0 ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={columnCount} className="h-12 text-center ">
                   {emptyMessage}
                 </TableCell>
               </TableRow>
+            ) : (
+              data.map((row) => (
+                <TableRow
+                  className={cn("hover:bg-primary/5 ", rowClassName)}
+                  key={String(row[rowKey as keyof T])}
+                >
+                  {columns.map((column) => {
+                    if (column.accessor) {
+                      return (
+                        <TableCell
+                          key={column.key as string}
+                          className={column.className as string}
+                        >
+                          {column.accessor(row)}
+                        </TableCell>
+                      );
+                    }
+
+                    const value = row[column.key as keyof T];
+
+                    return (
+                      <TableCell
+                        key={column.key as string}
+                        className={column.className}
+                      >
+                        {column.format
+                          ? column.format(value, row)
+                          : String(value ?? "-")}
+                      </TableCell>
+                    );
+                  })}
+
+                  {rowAction && <TableCell>{rowAction(row)}</TableCell>}
+                </TableRow>
+              ))
             )}
           </TableBody>
         </Table>
       </div>
     </div>
   );
-};
-
-export default DataTable;
+}

@@ -2,6 +2,7 @@ import { createOrderSchema } from "../validation/createOrderSchema";
 import z from "zod";
 import { IGear } from "./gear.interface";
 import { IMetaData } from "./common.interface";
+import { IUser } from "./user.interface";
 
 export type ICreateOrderPayload = z.infer<ReturnType<typeof createOrderSchema>>;
 
@@ -11,6 +12,15 @@ export interface ICreateOrderResponse {
   data: IOrder | null;
 }
 
+export interface IOrderResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    data: IOrder[];
+    metadata?: IMetaData;
+  };
+}
+
 export enum OrderStatus {
   PLACED = "PLACED",
   CONFIRMED = "CONFIRMED",
@@ -18,7 +28,7 @@ export enum OrderStatus {
   PAID = "PAID",
   PICKED = "PICKED",
   RETURNED = "RETURNED",
-  COMPLETED = "COMPLETED"
+  COMPLETED = "COMPLETED",
 }
 
 export interface IOrder {
@@ -33,25 +43,26 @@ export interface IOrder {
   expireAt: string;
   startDate: string;
   returnDate: string;
+  createdAt: string;
+  updatedAt: string;
+  customer: IUser;
+  item: IGear;
 }
 
 //=======================================
 
-export interface IAllOrderResponse {
-  success: boolean;
-  message: string;
-  data?: {
-    data: IOrderWithItem[];
-    metadata?: IMetaData;
-  };
-}
-
 export interface ISingleOrderResponse {
   success: boolean;
   message: string;
-  data?: IOrderWithItem;
+  data?: IOrder;
 }
 
-export interface IOrderWithItem extends IOrder {
-  item: IGear;
+export interface IOrderProvider {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface IOrderCategory {
+  name: string;
 }

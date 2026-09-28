@@ -58,7 +58,6 @@ const AddAndUpdateGearForm = ({
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = (values: IAddGearFormData) => {
-    console.log(values);
     const formData = new FormData();
 
     formData.append("name", values.name);

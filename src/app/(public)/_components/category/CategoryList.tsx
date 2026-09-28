@@ -1,6 +1,6 @@
 "use server";
 
-import { IApiResponse } from "@/interface";
+import { IApiResponse } from "@/interface/apiResponse";
 
 import { CategoryCard } from "./CategoryCard";
 import { ICategoryResponse } from "@/interface/category.interface";

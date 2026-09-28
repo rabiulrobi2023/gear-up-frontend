@@ -1,7 +1,7 @@
 import { envVar } from "@/config/envConfig";
 import { IQueryParams } from "@/interface/common.interface";
 
-export const backendBaseUrl = envVar.BACKEND_API_URL;
+export const backendBaseUrl = envVar.BACKEND_BASE_API_URL;
 
 export const getQueryUrl = async (
   { query }: IQueryParams,
@@ -19,6 +19,6 @@ export const getQueryUrl = async (
       }
     });
   }
-  const queryUrl = `${envVar.BACKEND_API_URL}${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
+  const queryUrl = `${envVar.BACKEND_BASE_API_URL}${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
   return queryUrl;
 };

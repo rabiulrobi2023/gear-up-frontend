@@ -1,13 +1,22 @@
-export interface ITableColumn {
-  key: string;
+import { HTMLProps, ReactNode } from "react";
+
+export interface IDataTableColumn<T> {
+  key: keyof T | (string & {});
   header: string;
-  className?: string;
+  className?: React.ComponentProps<"div">["className"];
+  accessor?: (row: T) => ReactNode | string;
+  format?: (value: unknown, row: T) => ReactNode;
 }
 
-export interface ITableProps<T> {
+export interface IDataTableProps<T> {
+  columns: IDataTableColumn<T>[];
   data: T[];
-  columns: ITableColumn[];
+  rowKey: keyof T;
+  topAction?: ReactNode;
+  rowAction?: (row: T) => ReactNode;
+  isLoading?: boolean;
   emptyMessage?: string;
-  topAction?: React.ReactNode;
-  rowAction?: React.ReactNode;
+  tableBodyClassName?: string
+  headerClassName?: string;
+  rowClassName?: string;
 }

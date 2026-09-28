@@ -23,7 +23,7 @@ export function LoginForm() {
   const form = useForm<ILoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "customer1@gmail.com",
+      email: "provider2@gmail.com",
       password: "111111",
     },
     mode: "onTouched",

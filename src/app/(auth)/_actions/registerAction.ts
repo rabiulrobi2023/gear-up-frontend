@@ -47,7 +47,6 @@ export const registerAction = async (
       data: result.data,
     };
   } catch (error) {
-    console.error("Registration error:", error);
     return {
       success: false,
       message: "Something went wrong. Please try again",

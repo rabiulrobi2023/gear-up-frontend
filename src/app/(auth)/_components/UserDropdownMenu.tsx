@@ -15,6 +15,7 @@ import { Role } from "@/interface/auth.interface";
 
 import { IUserResponse } from "@/interface/user.interface";
 import { getInitial } from "@/utils/getInitial";
+import { useQueryClient } from "@tanstack/react-query";
 import { LayoutDashboard, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -27,23 +28,13 @@ const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
   const dashboardHref = DASHBOARD_ROUTES[user?.data?.role as Role];
   const pathName = usePathname();
   const isDashboardRoute = pathName.startsWith("/dashboard");
-
+  const queryClient = useQueryClient();
   const userMenuItems = [
     {
       label: isDashboardRoute ? "Exit From Dashboard" : "Dashboard",
       icon: LayoutDashboard,
       href: isDashboardRoute ? "/" : dashboardHref,
     },
-    // {
-    //   label: "Profile",
-    //   icon: User,
-    //   href: "/profile",
-    // },
-    // {
-    //   label: "Settings",
-    //   icon: Settings,
-    //   href: "/settings",
-    // },
   ];
 
   const handleLogout = async () => {
@@ -51,7 +42,7 @@ const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
       await logout();
 
       toast.success("User logged out successfully!");
-
+      queryClient.clear();
       router.replace("/");
       router.refresh();
     } catch {

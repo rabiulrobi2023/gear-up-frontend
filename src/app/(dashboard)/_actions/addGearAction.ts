@@ -17,7 +17,6 @@ export const addGearAction = async (
     dailyRate: Number(formData.get("dailyRate")),
     stock: Number(formData.get("stock")),
   });
-  console.log(data);
 
   try {
     const headers = await getAuthenticatedHeaders();
@@ -53,7 +52,6 @@ export const addGearAction = async (
     revalidateTag("self-gears", { expire: 0 });
     return result;
   } catch (error: unknown) {
-    console.log(error);
     return {
       success: false,
       message: error instanceof Error ? error?.message : "Something went wrong",

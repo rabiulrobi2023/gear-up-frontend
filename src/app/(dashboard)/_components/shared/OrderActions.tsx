@@ -1,4 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { Role } from "@/interface/auth.interface";
 import { OrderStatus } from "@/interface/order.interface";
 
@@ -10,7 +13,8 @@ interface IOrderActionsProps {
   role: Role;
   orderId: string;
   reviewDialog?: React.ReactNode;
-  onConfirm?: () => void;
+  onConfirm?: (id: string) => void;
+  isConfirmPending?: boolean;
   onPickup?: () => void;
   onReturn?: () => void;
 }
@@ -21,13 +25,27 @@ const OrderActions = ({
   orderId,
   reviewDialog,
   onConfirm,
+  isConfirmPending,
   onPickup,
   onReturn,
 }: IOrderActionsProps) => {
-  if (status === OrderStatus.PLACED && role === Role.PROVIDER) {
+  if (status === OrderStatus?.PLACED && role === Role.PROVIDER) {
     return (
-      <Button size="sm" onClick={onConfirm}>
-        Confirm
+      <Button
+        disabled={isConfirmPending}
+        type="button"
+        size="sm"
+        onClick={() => {
+          onConfirm?.(orderId);
+        }}
+      >
+        {isConfirmPending ? (
+          <span className="flex gap-2">
+            <Spinner/> Confirming..
+          </span>
+        ) : (
+          "Confirm"
+        )}
       </Button>
     );
   }

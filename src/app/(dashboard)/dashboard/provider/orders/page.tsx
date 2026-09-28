@@ -1,17 +1,15 @@
-"use server";
-
 import { getMe } from "@/app/(auth)/_service/getMe";
-import { Role } from "@/interface/auth.interface";
-import SelfOrderList from "../../_components/shared/SelfOrderList";
+import SelfOrderList from "@/app/(dashboard)/_components/shared/SelfOrderList";
 
-const page = async () => {
+import { Role } from "@/interface/auth.interface";
+
+const IncomingOrderPage = async () => {
   const user = await getMe();
   return (
     <div>
-      <h1 className="text-xl font-bold">Orders</h1>
       <SelfOrderList role={user?.data?.role as Role} />
     </div>
   );
 };
 
-export default page;
+export default IncomingOrderPage;

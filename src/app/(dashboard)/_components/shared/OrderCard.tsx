@@ -1,30 +1,29 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { IOrderWithItem } from "@/interface/order.interface";
 import { format } from "date-fns";
-import { Eye } from "lucide-react";
 import Image from "next/image";
-import OrderStatusBadge from "../shared/OrderStatusBadge";
+import OrderStatusBadge from "./OrderStatusBadge";
 
 import { Role } from "@/interface/auth.interface";
-import OrderActions from "../shared/OrderActions";
-import { ReviewDialog } from "./ReviewDialog";
+import OrderActions from "./OrderActions";
+import { ReviewDialog } from "../customer/ReviewDialog";
+import { IOrder } from "@/interface/order.interface";
 
-const SelfOrderCard = ({
+const OrderCard = ({
   order,
   role,
   onConfirm,
+  isConfirmPending,
   onPay,
   onPickup,
   onReturn,
   onReview,
 }: {
-  order: IOrderWithItem;
+  order: IOrder;
   role: Role;
-  onConfirm?: () => void;
+  onConfirm?: (id: string) => void;
+  isConfirmPending?: boolean;
   onPay?: () => void;
   onPickup?: () => void;
   onReturn?: () => void;
@@ -40,12 +39,18 @@ const SelfOrderCard = ({
     totalDays,
     totalAmount,
     item,
+    customer,
   } = order;
 
+  const { name: customerName } = customer;
+
   const { id: itemId, name: gearName, brand, image, provider, category } = item;
+  const { name: providerName } = provider;
+
+  console.log(role)
 
   return (
-    <Card className="overflow-hidden p-0">
+    <Card className="overflow-hidden p-0  rounded-md ring-0 border-b shadow-none">
       <CardContent className="p-3">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           {/* Image */}
@@ -79,8 +84,12 @@ const SelfOrderCard = ({
             </div>
 
             <p className="mt-2 text-sm">
-              <span className="text-muted-foreground">Supplier:</span>{" "}
-              <span className="font-medium">{provider.name}</span>
+              <span className="text-muted-foreground">
+                {role === Role.CUSTOMER ? "Provider" : "Customer"}
+              </span>{" "}
+              <span className="font-medium">
+                {role === Role.CUSTOMER ? providerName : customerName}
+              </span>
             </p>
 
             {/* Rental Details */}
@@ -128,6 +137,7 @@ const SelfOrderCard = ({
                   <ReviewDialog itemId={itemId} orderId={orderId} />
                 }
                 onConfirm={onConfirm}
+                isConfirmPending={isConfirmPending}
                 onPickup={onPickup}
                 onReturn={onReturn}
               />
@@ -139,4 +149,4 @@ const SelfOrderCard = ({
   );
 };
 
-export default SelfOrderCard;
+export default OrderCard;

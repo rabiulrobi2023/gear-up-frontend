@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import {} from "@/interface";
+import {} from "@/interface/apiResponse";
 import { ICategory } from "@/interface/category.interface";
 
 export function CategoryCard({ category }: { category: ICategory }) {

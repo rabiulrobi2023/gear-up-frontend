@@ -1,8 +1,8 @@
-import { IAllOrderResponse } from "@/interface/order.interface";
+import { IOrderResponse } from "@/interface/order.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
 
-export const getSelfOrders = async (): Promise<IAllOrderResponse> => {
+export const getProviderOrders = async (): Promise<IOrderResponse> => {
   try {
     const headers = await getAuthenticatedHeaders();
 
@@ -13,17 +13,17 @@ export const getSelfOrders = async (): Promise<IAllOrderResponse> => {
       };
     }
 
-    const res = await fetch(`${backendBaseUrl}/rentals`, {
+    const res = await fetch(`${backendBaseUrl}/provider/orders`, {
       method: "GET",
       headers,
 
       next: {
         revalidate: 24 * 60 * 60,
-        tags: ["self-orders"],
+        tags: ["provider-orders"],
       },
     });
 
-    const result: IAllOrderResponse = await res.json();
+    const result = await res.json();
 
     if (!res.ok || !result.success) {
       return {

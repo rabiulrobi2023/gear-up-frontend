@@ -1,68 +1,73 @@
 "use client";
 
+import { DataTable } from "@/components/shared/table/DataTable";
+import { IPayment, IPaymentResponse } from "@/interface/payment.interface";
+import { IDataTableColumn } from "@/interface/table.interface";
 
-import DataTable from "@/components/shared/table/DataTable";
-import { IPayment } from "@/interface/payment.interface";
-import { ITableColumn } from "@/interface/table.interface";
-
-const columns: ITableColumn[] = [
+const columns: IDataTableColumn<IPayment>[] = [
   {
-    header: "Gear Name",
     key: "gearName",
+    header: "Gear Name",
+    accessor: (value) => value.order.item.name,
   },
 
   {
-    header: "Method",
     key: "method",
+    header: "Method",
     className: "text-center",
   },
 
   {
-    header: "Daily Rate",
     key: "dailyRate",
+    header: "Daily Rate",
+    accessor: (value) => value.order.item.dailyRate,
     className: "text-right",
   },
 
   {
-    header: "Quantity",
     key: "quantity",
+    header: "Quantity",
+    accessor: (value) => value.order.quantity,
     className: "text-right",
   },
 
   {
-    header: "Total Days",
     key: "totalDays",
+    header: "Total Days",
+    accessor: (value) => value.order.totalDays,
     className: "text-right",
   },
 
   {
-    header: "Total Amount",
     key: "amount",
+    header: "Total Amount",
     className: "text-right",
   },
 
   {
-    header: "Status",
     key: "status",
+    header: "Status",
     className: "text-right",
   },
 ];
 const PaymentTable = ({ paymentData }: { paymentData: IPayment[] }) => {
-  const tableData = paymentData.map((data) => ({
-    gearName: data.order.item.name,
-    method: data.method,
-    dailyRate: data.order.item.dailyRate,
-    quantity: data.order.quantity,
-    totalDays: data.order.totalDays,
-    amount: data.amount,
-    status: data.status,
-  }));
+  // const tableData = paymentData.map((data) => ({
+  //   id: data.id,
+  //   gearName: data.order.item.name,
+  //   method: data.method,
+  //   dailyRate: data.order.item.dailyRate,
+  //   quantity: data.order.quantity,
+  //   totalDays: data.order.totalDays,
+  //   amount: data.amount,
+  //   status: data.status,
+  // }));
 
   return (
-    <DataTable 
+    <DataTable
       columns={columns}
-      data={tableData}
-      emptyMessage="There is no any payment" 
+      data={paymentData}
+      emptyMessage="There is no any payment"
+      rowKey={"id"}
     />
   );
 };
