@@ -1,8 +1,7 @@
 "use client";
 
-import ActionButton from "@/components/shared/ActionButton";
+import { ActionDialog } from "@/components/shared/ActionDialog";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 import { Role } from "@/interface/auth.interface";
 import { OrderStatus } from "@/interface/order.interface";
 
@@ -32,13 +31,12 @@ const OrderActions = ({
 }: IOrderActionsProps) => {
   if (status === OrderStatus?.PLACED && role === Role.PROVIDER) {
     return (
-      <ActionButton
+      <ActionDialog
+        triggerBtn={<Button>Confirm</Button>}
+        onAction={() => onConfirm?.(orderId)}
         loading={isPending}
-        loadingText="Confirming.."
-        onClick={() => onConfirm?.(orderId)}
-      >
-        Confirm
-      </ActionButton>
+        loadingText="Confirming..."
+      />
     );
   }
 
@@ -51,24 +49,19 @@ const OrderActions = ({
   }
   if (status === OrderStatus.PAID && role === Role.PROVIDER) {
     return (
-      <ActionButton
+      <ActionDialog
+        onAction={() => onPickup?.(orderId)}
+        triggerBtn={<Button> Mark Picked Up</Button>}
         loading={isPending}
-        loadingText="Picking..."
-        onClick={() => onPickup?.(orderId)}
-      >
-        Mark Picked Up
-      </ActionButton>
+      />
     );
   }
   if (status === OrderStatus.PICKED && role === Role.PROVIDER) {
     return (
-      <ActionButton
-        loading={isPending}
-        loadingText="Returning..."
-        onClick={() => onReturn?.(orderId)}
-      >
-        Mark as Return
-      </ActionButton>
+      <ActionDialog
+        onAction={() => onReturn?.(orderId)}
+        triggerBtn={<Button> Mark as Return</Button>}
+      />
     );
   }
 
