@@ -2,6 +2,27 @@ import z from "zod";
 import { IMetaData } from "./common.interface";
 import { addGearSchema } from "@/validation/addGearSchema";
 
+export type IAddGearFormData = z.infer<typeof addGearSchema>;
+
+export interface IAddGear {
+  id: string;
+  name: string;
+  brand: string;
+  description: string;
+  image: string;
+  providerId: string;
+  categoryId: string;
+  dailyRate: string;
+  stock: number;
+  isAvailable: boolean;
+}
+
+export interface IAddGearResponse {
+  success: boolean;
+  message: string;
+  data: IAddGear | null;
+}
+
 export interface IAllGearResponse {
   success: boolean;
   message: string;
@@ -45,23 +66,14 @@ interface Category {
   name: string;
 }
 
-export type IAddGearFormData = z.infer<typeof addGearSchema>;
+export type INestedGearField =
+  | "providerName"
+  | "providerEmail"
+  | "providerPhone"
+  | "categoryName";
 
-export interface IAddGear {
-  id: string;
-  name: string;
-  brand: string;
-  description: string;
-  image: string;
-  providerId: string;
-  categoryId: string;
-  dailyRate: string;
-  stock: number;
-  isAvailable: boolean;
-}
-
-export interface IAddGearResponse {
-  success: boolean;
+export interface IDeleteGearResponse {
+  success: true;
   message: string;
-  data: IAddGear | null;
+  data: null;
 }

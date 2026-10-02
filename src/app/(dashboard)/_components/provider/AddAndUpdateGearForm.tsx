@@ -11,7 +11,7 @@ import React, { useActionState, useEffect, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import RequiredLabel from "@/components/shared/RequiredLabel";
-import { IAddGear, IAddGearFormData } from "@/interface/gear.interface";
+import { IAddGearFormData, IGear } from "@/interface/gear.interface";
 import { addGearSchema } from "@/validation/addGearSchema";
 import { addGearAction } from "../../_actions/addGearAction";
 import { ICategory } from "@/interface/category.interface";
@@ -24,9 +24,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { updateGearAction } from "../../_actions/updateGearAction";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface IAddGearFormProps {
-  gear?: IAddGear;
+  gear?: IGear;
   categories: ICategory[];
   mode: "add" | "edit";
 }
@@ -36,24 +38,38 @@ const AddAndUpdateGearForm = ({
   categories,
   mode,
 }: IAddGearFormProps) => {
-  const action = mode === "add" ? addGearAction : addGearAction;
+  const action = mode === "add" ? addGearAction : updateGearAction;
   const router = useRouter();
 
   const form = useForm<IAddGearFormData>({
     resolver: zodResolver(addGearSchema),
     mode: "all",
     defaultValues: {
-      name: gear?.name,
-
-      brand: gear?.brand || "",
-      description: gear?.description || "",
-      image: gear?.image || "",
-      dailyRate: Number(gear?.dailyRate),
-      stock: Number(gear?.stock),
+      name: "",
+      brand: "",
+      categoryId: "",
+      description: "",
+      image: "",
+      dailyRate: 0,
+      stock: 0,
     },
   });
 
-  const [state, formAction] = useActionState(action, null);
+  useEffect(() => {
+    if (mode !== "edit" || !gear || !categories.length) return;
+
+    form.reset({
+      name: gear.name ?? "",
+      categoryId: gear.category?.id ?? "",
+      brand: gear.brand ?? "",
+      description: gear.description ?? "",
+      image: gear.image ?? "",
+      dailyRate: Number(gear.dailyRate) || 0,
+      stock: Number(gear.stock) || 0,
+    });
+  }, [gear, mode, form, categories]);
+
+  const [state, formAction] = useActionState(action.bind(null, gear?.id), null);
 
   const [isPending, startTransition] = useTransition();
 
@@ -73,17 +89,25 @@ const AddAndUpdateGearForm = ({
     });
   };
 
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     if (!state) return;
 
     if (state.success) {
-      toast.success(state.message || "User registered successfully");
+      toast.success(
+        state.message ||
+          `Gear ${mode === "add" ? "added" : "updated"} successfully`,
+      );
+      if (mode === "edit") {
+        queryClient.invalidateQueries({ queryKey: ["providersGears"] });
+      }
 
       router.push("/dashboard/provider/my-gears");
     } else {
       toast.error(state.message || "User registration failed");
     }
-  }, [state, router]);
+  }, [state, router, queryClient, mode]);
 
   return (
     <>
@@ -96,7 +120,7 @@ const AddAndUpdateGearForm = ({
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field>
-                  <RequiredLabel htmlFor="name">Name</RequiredLabel>
+                  <RequiredLabel htmlFor="name">Gear Name</RequiredLabel>
 
                   <Input
                     {...field}
@@ -121,7 +145,10 @@ const AddAndUpdateGearForm = ({
                 <Field>
                   <RequiredLabel htmlFor="name">Category</RequiredLabel>
 
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={field.onChange}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
@@ -268,12 +295,11 @@ const AddAndUpdateGearForm = ({
         </form>
       </CardContent>
 
-      <CardFooter className="flex-col gap-2">
+      <CardFooter className="flex justify-end">
         <Button
           type="submit"
           form="gear-form"
-          disabled={isPending}
-          className="w-full"
+          disabled={isPending || (mode === "edit" && !form.formState.isDirty)}
         >
           {mode === "add"
             ? isPending

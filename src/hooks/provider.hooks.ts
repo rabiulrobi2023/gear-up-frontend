@@ -1,6 +1,6 @@
+import { deleteGear, getProvidersGears } from "@/api/gear.api";
 import {
   confirmOrder,
-
   getPendingOrders,
   getProviderGearStatistics,
 } from "@/api/provider.api";
@@ -12,7 +12,6 @@ export const useProviderGearStatistics = () => {
     queryFn: getProviderGearStatistics,
   });
 };
-
 
 export const usePendingOrders = () => {
   return useQuery({
@@ -33,5 +32,18 @@ export const useConfirmOrder = () => {
         queryKey: ["myAllOrders"],
       });
     },
+  });
+};
+
+export const useGetAllGears = () => {
+  return useQuery({
+    queryKey: ["providersGears"],
+    queryFn: getProvidersGears,
+  });
+};
+
+export const useDeleteGear = () => {
+  return useMutation({
+    mutationFn: (id: string) => deleteGear(id),
   });
 };

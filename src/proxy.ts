@@ -73,6 +73,8 @@ export async function proxy(request: NextRequest) {
   const isPublicRoute = routeTester(pathname, PUBLIC_ROUTES);
   const isAuthRoutes = routeTester(pathname, AUTH_ROUTES);
 
+
+
   const redirectToDashboard = () => {
     const redirectTo = DASHBOARD_ROUTES[userRole as Role];
     return NextResponse.redirect(new URL(redirectTo, url));

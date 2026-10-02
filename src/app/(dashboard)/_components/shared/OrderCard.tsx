@@ -111,7 +111,7 @@ const OrderCard = ({
           </div>
 
           {/* Price + Status */}
-          <div className="flex items-center justify-between border-t pt-3 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0 gap-2">
+          <div className="flex items-center justify-between  pt-3 sm:flex-col sm:items-end  sm:pt-0 gap-2">
             {/* Desktop status */}
             <span className="hidden sm:flex">
               {" "}

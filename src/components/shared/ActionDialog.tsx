@@ -44,14 +44,14 @@ export function ActionDialog({
         {triggerBtn}
       </AlertDialogTrigger>
 
-      <AlertDialogContent>
+      <AlertDialogContent className="w-[400px]">
         <AlertDialogHeader>
           <AlertDialogTitle>{dialogTitle}</AlertDialogTitle>
 
           <AlertDialogDescription>{dialogDescription}</AlertDialogDescription>
         </AlertDialogHeader>
 
-        <AlertDialogFooter>
+        <AlertDialogFooter className="flex-row justify-end">
           <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
 
           <AlertDialogAction

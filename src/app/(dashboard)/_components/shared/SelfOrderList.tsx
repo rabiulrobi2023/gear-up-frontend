@@ -17,10 +17,6 @@ const SelfOrderList = ({ role }: { role: Role }) => {
     return <FullDisplayLoader />;
   }
 
-  if (!orders) {
-    return <p>There is no any order</p>;
-  }
-
   const handleOrderStatusChange = (status: OrderStatus) => {
     return (id: string) => {
       confirm(
@@ -39,18 +35,21 @@ const SelfOrderList = ({ role }: { role: Role }) => {
 
   const handleConfirmOrder = handleOrderStatusChange(OrderStatus.CONFIRMED);
   const handlePickupOrder = handleOrderStatusChange(OrderStatus.PICKED);
-  const handleReturnOrder = handleOrderStatusChange(OrderStatus.RETURNED)
-
+  const handleReturnOrder = handleOrderStatusChange(OrderStatus.RETURNED);
 
   return (
-    <div className="space-y-5 mt-5">
+    <div className="space-y-2">
+      <p className="text-xl font-bold">Orders</p>
+      {orders?.data?.data?.length === 0 && <p>There is no any order</p>}
       {orders?.data?.data?.map((order) => (
         <OrderCard
           key={order.id}
           order={order}
           role={role}
           onConfirm={handleConfirmOrder}
-          isPending={isPending && variables?.id === order.id} onPickup={handlePickupOrder} onReturn={handleReturnOrder}
+          isPending={isPending && variables?.id === order.id}
+          onPickup={handlePickupOrder}
+          onReturn={handleReturnOrder}
         />
       ))}
     </div>

@@ -4,11 +4,18 @@ import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
 import { revalidateTag } from "next/cache";
 
-export const addGearAction = async (
-  _id: string | undefined,
+export const updateGearAction = async (
+  id: string | undefined,
   previousState: IAddGearResponse | null,
   formData: FormData,
 ): Promise<IAddGearResponse> => {
+  if (!id) {
+    return {
+      success: false,
+      message: "Gear ID is required",
+      data: null,
+    };
+  }
   const data = JSON.stringify({
     name: formData.get("name"),
     brand: formData.get("brand"),
@@ -30,14 +37,11 @@ export const addGearAction = async (
       };
     }
 
-    const res = await fetch(`${backendBaseUrl}/provider/gear`, {
-      method: "POST",
+    const res = await fetch(`${backendBaseUrl}/provider/gear/${id}`, {
+      method: "PUT",
       headers,
       body: data,
       cache: "no-cache",
-      next: {
-        tags: ["add-gear"],
-      },
     });
 
     const result: IAddGearResponse = await res.json();
@@ -45,7 +49,7 @@ export const addGearAction = async (
     if (!res.ok || !result.success) {
       return {
         success: false,
-        message: result.message || "Failed to fetch add gear",
+        message: result.message || "Failed to update gear",
         data: null,
       };
     }

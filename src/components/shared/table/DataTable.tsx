@@ -9,95 +9,94 @@ import {
 import { IDataTableProps } from "@/interface/table.interface";
 import { cn } from "@/lib/utils";
 
-export function DataTable<T>({
+export function DataTable<T, K extends string = never>({
   data,
-
   columns,
   rowKey,
+  showSerialNo = false,
   topAction,
-  rowAction,
+  rowActions,
   isLoading = false,
   emptyMessage = "No data found.",
   tableBodyClassName,
   headerClassName,
   rowClassName,
-}: IDataTableProps<T>) {
-  const columnCount = columns.length + (rowAction ? 1 : 0);
+}: IDataTableProps<T, K>) {
+  const columnCount = columns.length + (rowActions ? 1 : 0);
 
   return (
     <div className="space-y-4">
       {topAction && <div className="flex justify-end">{topAction}</div>}
 
       <div
-        className={cn(
-          "rounded-md border-1 overflow-hidden",
-          tableBodyClassName,
-        )}
+        className={cn("overflow-hidden rounded-md border", tableBodyClassName)}
       >
         <Table>
-          <TableHeader className="bg-none hover:bg-none">
+          <TableHeader>
             <TableRow
-              className={cn("hover:bg-gray-100 bg-gray-100", headerClassName)}
+              className={cn(
+                "bg-primary/10 hover:bg-primary/10",
+                headerClassName,
+              )}
             >
+              {showSerialNo && (
+                <TableHead className="text-center whitespace-nowrap w-0">
+                  SL No.
+                </TableHead>
+              )}
               {columns.map((column) => (
                 <TableHead
-                  key={column.key as string}
+                  key={String(column.key)}
                   className={column.className}
                 >
                   {column.header}
                 </TableHead>
               ))}
 
-              {rowAction && <TableHead>Actions</TableHead>}
+              {rowActions && <TableHead>Actions</TableHead>}
             </TableRow>
           </TableHeader>
 
-          <TableBody className="">
+          <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={columnCount} className="h-24 text-center">
+                <TableCell colSpan={columnCount} className="h-24 text-center ">
                   Loading...
                 </TableCell>
               </TableRow>
             ) : data.length === 0 ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={columnCount} className="h-12 text-center ">
+                <TableCell colSpan={columnCount} className="h-12 text-center">
                   {emptyMessage}
                 </TableCell>
               </TableRow>
             ) : (
-              data.map((row) => (
+              data.map((row, index) => (
                 <TableRow
-                  className={cn("hover:bg-primary/5 ", rowClassName)}
-                  key={String(row[rowKey as keyof T])}
+                  key={String(row[rowKey])}
+                  className={cn("hover:bg-primary/5", rowClassName)}
                 >
-                  {columns.map((column) => {
-                    if (column.accessor) {
-                      return (
-                        <TableCell
-                          key={column.key as string}
-                          className={column.className as string}
-                        >
-                          {column.accessor(row)}
-                        </TableCell>
-                      );
-                    }
+                  {showSerialNo && (
+                    <TableCell className="text-center whitespace-nowrap w-0 px-2">
+                      {index + 1}
+                    </TableCell>
+                  )}
 
-                    const value = row[column.key as keyof T];
+                  {columns.map((column) => {
+                    const key = column.key;
 
                     return (
-                      <TableCell
-                        key={column.key as string}
-                        className={column.className}
-                      >
-                        {column.format
-                          ? column.format(value, row)
-                          : String(value ?? "-")}
+                      <TableCell key={String(key)} className={column.className}>
+                        {column.accessor
+                          ? column.accessor(row)
+                          : column.format
+                            ? column.format(row[key as keyof T], row)
+                            : String(row[key as keyof T] ?? "-")}
                       </TableCell>
                     );
                   })}
 
-                  {rowAction && <TableCell>{rowAction(row)}</TableCell>}
+                  {rowActions && <TableCell>{rowActions(row)}</TableCell>}
                 </TableRow>
               ))
             )}
