@@ -4,9 +4,9 @@ import { OrderStatus } from "@/interface/order.interface";
 import { Role } from "@/interface/auth.interface";
 import { useConfirmOrder } from "@/hooks/provider.hooks";
 import { toast } from "sonner";
-import FullDisplayLoader from "@/components/ui/spinner";
 import OrderCard from "./OrderCard";
 import { useGetMyAllOrders } from "@/hooks/share.hook";
+import OrderCardSkeletonList from "./OrderCardSkeletonList";
 
 const SelfOrderList = ({ role }: { role: Role }) => {
   const { data: orders, isLoading: orderFetchLoading } = useGetMyAllOrders();
@@ -14,7 +14,7 @@ const SelfOrderList = ({ role }: { role: Role }) => {
   const { mutate: confirm, isPending, variables } = useConfirmOrder();
 
   if (orderFetchLoading) {
-    return <FullDisplayLoader />;
+    return <OrderCardSkeletonList count={10} />;
   }
 
   const handleOrderStatusChange = (status: OrderStatus) => {

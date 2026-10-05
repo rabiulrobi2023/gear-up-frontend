@@ -43,7 +43,11 @@ export const useGetAllGears = () => {
 };
 
 export const useDeleteGear = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => deleteGear(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["myAllGears"] });
+    },
   });
 };

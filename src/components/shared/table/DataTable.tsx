@@ -53,7 +53,7 @@ export function DataTable<T, K extends string = never>({
                 </TableHead>
               ))}
 
-              {rowActions && <TableHead>Actions</TableHead>}
+              {rowActions && <TableHead className=" text-center whitespace-nowrap w-0">Actions</TableHead>}
             </TableRow>
           </TableHeader>
 
@@ -96,7 +96,7 @@ export function DataTable<T, K extends string = never>({
                     );
                   })}
 
-                  {rowActions && <TableCell>{rowActions(row)}</TableCell>}
+                  {rowActions && <TableCell className="flex items-center justify-center ">{rowActions(row)}</TableCell>}
                 </TableRow>
               ))
             )}

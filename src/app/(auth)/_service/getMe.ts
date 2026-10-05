@@ -1,10 +1,10 @@
 "use server";
 
-import { IUserResponse } from "@/interface/user.interface";
+import { IGetMeResponse } from "@/interface/user.interface";
 import { getAuthenticatedHeaders } from "@/utils/getAuthenticatedHeaders";
 import { backendBaseUrl } from "@/utils/url";
 
-export const getMe = async (): Promise<IUserResponse | null> => {
+export const getMe = async (): Promise<IGetMeResponse | null> => {
   try {
     const headers = await getAuthenticatedHeaders();
     if (!headers) {

@@ -4,7 +4,14 @@ import { DataTable } from "@/components/shared/table/DataTable";
 import { IPayment, IPaymentResponse } from "@/interface/payment.interface";
 import { IDataTableColumn } from "@/interface/table.interface";
 
-const columns: IDataTableColumn<IPayment>[] = [
+type nestedCustomerPaymentKey =
+  | "gearName"
+  | " dailyRate"
+  | "quantity"
+  | "dailyRate"
+  | "totalDays";
+
+const columns: IDataTableColumn<IPayment, nestedCustomerPaymentKey>[] = [
   {
     key: "gearName",
     header: "Gear Name",

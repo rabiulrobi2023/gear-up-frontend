@@ -6,13 +6,15 @@ import {
   usePendingOrders,
   useProviderGearStatistics,
 } from "@/hooks/provider.hooks";
+import DashboardStatistics from "../shared/DashboardStatistics";
+import { IStatisticItem } from "@/interface/dashboard.interface";
 
 export function ProviderGearStatistics() {
   const { data, isLoading } = useProviderGearStatistics();
 
   const statistics = data?.data;
 
-  const items = [
+  const items: IStatisticItem[] = [
     {
       title: "Total Gear",
       value: statistics?.totalGears,
@@ -33,32 +35,5 @@ export function ProviderGearStatistics() {
     },
   ];
 
-  return (
-    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item) => {
-        const Icon = item.icon;
-
-        return (
-          <Card
-            key={item.title}
-            className="!shadow-xl ring-0 bg-primary/3 rounded-md"
-          >
-            <CardContent className="flex items-center justify-center ">
-              <div className="space-y-1 flex flex-col items-center">
-                <p className="text-xl  font-bold text-primary">{item.title}</p>
-
-                <p className="text-xl font-bold">{item.value}</p>
-
-                <p className=" text-muted-foreground">{item.description}</p>
-              </div>
-
-              <div className="flex size-12 items-center justify-center rounded-full bg-primary/10">
-                <Icon className="size-6 text-primary" />
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
-    </div>
-  );
+  return <DashboardStatistics items={items} />;
 }

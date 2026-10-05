@@ -10,7 +10,7 @@ import LoginFormSkeleton from "../../_components/LoginFormSkeleton";
 
 const LoginPage = async () => {
   return (
-    <Card className="w-full min-w-sm max-w-sm overflow-auto ring-0 shadow-2xl shadow-primary/10 ">
+    <Card className="w-full min-w-sm max-w-sm overflow-auto ring-0 shadow-2xl ">
       <CardHeader>
         <CardTitle className="text-center font-bold text-xl">
           Login to your account

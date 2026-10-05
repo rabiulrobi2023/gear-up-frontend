@@ -6,16 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useDeleteGear, useGetAllGears } from "@/hooks/provider.hooks";
 import { IGear, INestedGearField } from "@/interface/gear.interface";
 import { IDataTableColumn } from "@/interface/table.interface";
-import { useQueries, useQueryClient } from "@tanstack/react-query";
-import {
-  Delete,
-  DeleteIcon,
-  Edit,
-  LucideDelete,
-  Plus,
-  Trash,
-  TrashIcon,
-} from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { Edit, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -37,7 +29,7 @@ const providerGearTableColumn: IDataTableColumn<IGear, INestedGearField>[] = [
       ) : (
         "-"
       ),
-    className: "text-left",
+    className: "",
   },
 
   {
@@ -62,7 +54,7 @@ const providerGearTableColumn: IDataTableColumn<IGear, INestedGearField>[] = [
   {
     key: "stock",
     header: "Stock",
-    className: "text-right",
+    className: "text-center",
   },
 ];
 
@@ -70,19 +62,19 @@ const ProviderGearsTable = () => {
   const { data, isLoading } = useGetAllGears();
   const gears = data?.data.data;
 
-  const { mutate: deleteGear, isPending } = useDeleteGear();
-  const queryClient = useQueryClient();
+  const { mutateAsync, isPending } = useDeleteGear();
 
-  const handleDelete = (id: string) => {
-    deleteGear(id, {
-      onSuccess: (res) => {
-        toast.success(res.message || "Gear deleted successfully");
-        queryClient.invalidateQueries({ queryKey: ["providersGears"] });
-      },
-      onError: (error) => {
-        toast.error(error?.message || "Something went wrong");
-      },
-    });
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await mutateAsync(id);
+      toast.success(res.message);
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Something went wrong",
+      );
+      throw error;
+    }
   };
 
   return (
@@ -113,6 +105,8 @@ const ProviderGearsTable = () => {
               loading={isPending}
               actionBtnProps={{ variant: "destructive" }}
               loadingText="Deleting..."
+              dialogDescription="Are you sure you want to delete this gear? This action cannot be undone."
+              actionBtnText="Delete"
             />
           </div>
         )}

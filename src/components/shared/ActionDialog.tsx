@@ -23,7 +23,7 @@ interface IActionDialogProps {
   actionBtnProps?: ComponentProps<typeof AlertDialogAction>;
   loadingText?: string;
   loading?: boolean;
-  onAction: () => void;
+  onAction: () => Promise<void>;
 }
 
 export function ActionDialog({
@@ -37,6 +37,13 @@ export function ActionDialog({
   onAction,
 }: IActionDialogProps) {
   const [open, setOpen] = useState(false);
+
+  const handleAction = async () => {
+    try {
+      await onAction();
+      setOpen(false);
+    } catch {}
+  };
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -57,7 +64,7 @@ export function ActionDialog({
           <AlertDialogAction
             onClick={(event) => {
               event.preventDefault();
-              onAction();
+              handleAction();
             }}
             disabled={loading}
             {...actionBtnProps}

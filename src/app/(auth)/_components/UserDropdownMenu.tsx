@@ -12,8 +12,8 @@ import {
 
 import { DASHBOARD_ROUTES } from "@/constants/proxy.constant";
 import { Role } from "@/interface/auth.interface";
+import { IGetMeResponse } from "@/interface/user.interface";
 
-import { IUserResponse } from "@/interface/user.interface";
 import { getInitial } from "@/utils/getInitial";
 import { useQueryClient } from "@tanstack/react-query";
 import { LayoutDashboard, LogOut, User } from "lucide-react";
@@ -21,7 +21,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const UserDropdownMenu = ({ user }: { user?: IUserResponse }) => {
+const UserDropdownMenu = ({ user }: { user?: IGetMeResponse }) => {
   const router = useRouter();
   const initial = getInitial(user?.data?.name as string);
 

@@ -1,7 +1,7 @@
 import {
   IDashboardMenus,
   IUserDashboardMenus,
-} from "@/interface/dashboardMenu.interface";
+} from "@/interface/dashboard.interface";
 import {
   ChartNoAxesCombined,
   CircleDollarSign,
@@ -53,10 +53,11 @@ export const providerDashboardMenus: IDashboardMenus[] = [
 
 export const adminDashboardMenus: IDashboardMenus[] = [
   {
-    label: "Statistics",
+    label: "Dashboard",
     href: "/dashboard/admin",
-    icon: ChartNoAxesCombined,
+    icon: LayoutDashboard,
   },
+
   {
     label: "All Users",
     href: "/dashboard/admin/users",
@@ -66,6 +67,6 @@ export const adminDashboardMenus: IDashboardMenus[] = [
 
 export const UserDashboardMenus: IUserDashboardMenus = {
   CUSTOMER: customerDashboardMenus,
-  ADMIN: customerDashboardMenus,
+  ADMIN: adminDashboardMenus,
   PROVIDER: providerDashboardMenus,
 };

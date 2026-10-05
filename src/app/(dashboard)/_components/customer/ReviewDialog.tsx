@@ -30,6 +30,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Spinner } from "@/components/ui/spinner";
 import { leaveReview } from "../../_actions/leaveReview";
 import RequiredLabel from "@/components/shared/RequiredLabel";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function ReviewDialog({
   itemId,
@@ -69,19 +70,20 @@ export function ReviewDialog({
       formAction(formData);
     });
   };
-
+  const queryClient = useQueryClient();
   useEffect(() => {
     if (!state) return;
-
     if (state.success) {
       toast.success(state.message || "Leave reviewed successfully");
       form.reset();
       setOpen(false);
-      router.refresh();
+      queryClient.invalidateQueries({
+        queryKey: ["myAllOrders"],
+      });
     } else {
       toast.error(state.message || "Reviewed failed");
     }
-  }, [state, router, form]);
+  }, [state, router, form, queryClient]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
